@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>OptiMaxProAI — Launch Edition</title>
-<meta name="description" content="AI that remembers what matters—so you don't have to." />
+<meta name="description" content="Spend less time managing life—and more time living it." />
 <style>
 :root{
   --bg:#070a10;
@@ -234,23 +234,6 @@ p{margin:0}
 .wait{display:flex;gap:5px;background:#fff;padding:4px;border-radius:999px;margin-top:14px;max-width:365px}
 .wait input{flex:1;min-width:0;border:0;outline:0;padding:0 10px;font-size:.76rem}
 .wait button{border:0;border-radius:999px;padding:9px 11px;background:linear-gradient(90deg,var(--purple),var(--green));color:#fff;font-size:.72rem;font-weight:900;cursor:pointer}
-.future-link{
-  display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.8rem;font-weight:850;
-  color:var(--lime);border:1px solid rgba(166,233,122,.35);border-radius:999px;padding:9px 15px;
-  background:rgba(166,233,122,.08);cursor:pointer;transition:.25s ease
-}
-.future-link:hover{background:rgba(166,233,122,.16);transform:translateY(-1px)}
-.future-link.added{color:#fff;background:linear-gradient(90deg,var(--purple),var(--green));border-color:transparent}
-.interest-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:650px;margin:22px auto 0;text-align:left
-}
-.interest-chip{
-  display:flex;align-items:center;gap:8px;padding:10px 13px;border-radius:14px;
-  background:rgba(255,255,255,.55);border:1px solid #dedfe7;font-size:.82rem;color:#333c4a;font-weight:700;cursor:pointer
-}
-.interest-chip input{width:15px;height:15px;accent-color:#6B2BDD}
-.join-hint{margin-top:20px;font-size:.85rem;color:#7c8798;text-align:center}
-@media(max-width:720px){.interest-grid{grid-template-columns:repeat(2,1fr)}}
 .map-art{position:absolute;right:0;top:0;width:48%;height:100%;opacity:.72;background:linear-gradient(135deg,rgba(107,43,221,.15),rgba(40,180,99,.12)),repeating-linear-gradient(24deg,transparent 0 42px,rgba(255,255,255,.045) 43px 45px),#283243;-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 40%);mask-image:linear-gradient(90deg,transparent 0%,black 40%)}
 .route{position:absolute;right:32px;top:45px;width:210px;height:120px;border:7px solid transparent;border-top-color:var(--green);border-right-color:var(--cyan);border-radius:50%;transform:rotate(-12deg)}
 .map-dot{position:absolute;width:17px;height:17px;border-radius:50%;background:var(--violet);right:205px;bottom:48px;box-shadow:0 0 0 5px rgba(255,255,255,.82)}
@@ -483,16 +466,123 @@ section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .secti
   .route-road{transform:scale(.8)}
 }
 
+
+/* V12 polish — brand plate, section rhythm, and image relevance only */
+.nav{
+  background:rgba(248,249,251,.94)!important;
+  border-bottom:1px solid #e5e7ec!important;
+  box-shadow:0 10px 26px rgba(17,24,39,.06);
+}
+.navlinks{color:#202635!important}
+.navlinks>a:not(.btn){color:#202635!important}
+
+.logo-plate{
+  width:315px;height:72px;display:flex;align-items:center;justify-content:flex-start;
+  border-radius:18px;overflow:hidden;background:linear-gradient(90deg,#eef0f2,#dde4e7);
+  box-shadow:0 7px 18px rgba(17,24,39,.08);
+}
+.logo-plate img{width:100%;height:100%;object-fit:cover;object-position:center}
+.footer-logo-plate{
+  width:330px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(90deg,#eef0f2,#dde4e7);
+}
+.footer-logo-plate img{width:100%;display:block}
+
+/* more intentional color rhythm */
+.hero{
+  background:
+    radial-gradient(circle at 12% 18%,rgba(107,43,221,.22),transparent 27%),
+    radial-gradient(circle at 88% 18%,rgba(40,180,99,.16),transparent 26%),
+    linear-gradient(110deg,#0b0d14 0%,#151226 52%,#0a1715 100%)!important;
+}
+#why{
+  background:
+    radial-gradient(circle at 12% 10%,rgba(107,43,221,.06),transparent 24%),
+    radial-gradient(circle at 90% 15%,rgba(40,180,99,.05),transparent 22%),
+    #fafbfc!important;
+}
+#circle{
+  background:
+    radial-gradient(circle at 78% 40%,rgba(107,43,221,.14),transparent 30%),
+    linear-gradient(135deg,#0a0f18 0%,#15142b 58%,#0b1815 100%)!important;
+}
+#live{
+  background:
+    linear-gradient(180deg,#f7f8fb 0%,#eef2f5 100%)!important;
+  color:#101522;
+}
+#live .section-title,#live h3{color:#101522}
+#live .kicker{color:#6B2BDD}
+#live .app-card h3,#live .app-card .kicker{color:#fff}
+#live .app-desc,#live .app-point{color:#eef2f6}
+#vision{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(107,43,221,.12),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(40,180,99,.10),transparent 23%),
+    linear-gradient(180deg,#0d1420,#121a28 65%,#0b1715)!important;
+}
+#join{
+  background:
+    radial-gradient(circle at 14% 10%,rgba(107,43,221,.07),transparent 25%),
+    radial-gradient(circle at 88% 20%,rgba(40,180,99,.06),transparent 22%),
+    #fafbfc!important;
+  color:#111827;
+}
+#join .cta{
+  background:linear-gradient(135deg,#f1ebff 0%,#eefaf1 100%)!important;
+  border-color:#e1e4ea!important;
+}
+#join .kicker{color:#6B2BDD}
+#join h2{color:#111827}
+#join p{color:#667085}
+
+/* happy-human section stays light and airy */
+section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join){
+  background:#ffffff!important;
+}
+
+/* slideshow photo treatment */
+.showcase-photo{
+  background-color:#0b1018;
+}
+.showcase-photo::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.03) 0%,rgba(0,0,0,.08) 48%,rgba(0,0,0,.60) 100%);
+  pointer-events:none;
+}
+.showcase-body{position:relative;z-index:3}
+.logo-plate,.footer-logo-plate{isolation:isolate}
+
+@media(max-width:720px){
+  .logo-plate{width:235px;height:58px}
+  .footer-logo-plate{width:250px}
+}
+
+
+.brand-word-wrap{display:flex;flex-direction:column;text-decoration:none}
+.brand-wordmark{font-size:2rem;font-weight:900;letter-spacing:-.05em;line-height:1}
+.bw-opti{color:#fff}
+.nav .bw-opti{color:#111827}
+.bw-max{background:linear-gradient(90deg,#6B2BDD,#A855F7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bw-ai{background:linear-gradient(90deg,#22C55E,#22C7E8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-word-sub{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#6b7280;font-weight:700;margin-top:4px}
+.footer-word-sub{color:#cbd5e1}
+.footer-wordmark .bw-opti{color:#fff}
+.logo-plate,.footer-logo-plate{display:none!important}
+
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#top" class="brand-word-wrap">
-      <div class="brand-wordmark"><span class="bw-opti">Opti</span><span class="bw-max">MaxPro</span><span class="bw-ai">AI</span></div>
-      <span class="brand-word-sub">Optimize Everything. Maximize Life.</span>
-    </a>
+    <a href="#top" class="brand-word-wrap" aria-label="OptiMaxProAI Home">
+  <div class="brand-wordmark">
+    <span class="bw-opti">Opti</span><span class="bw-max">MaxPro</span><span class="bw-ai">AI</span>
+  </div>
+  <span class="brand-word-sub">Optimize Everything. Maximize Life.</span>
+</a>
     <div class="navlinks">
       <a href="#why">Why It Matters</a>
       <a href="#circle">OptiCircleAI</a>
@@ -505,11 +595,12 @@ section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .secti
 
 <header id="top" class="hero">
   <div class="container hero-grid">
+    
     <div class="hero-copy">
       <div class="kicker">Your life. Optimized.</div>
-      <h1>AI that remembers what matters—<span class="grad">so you don’t have to.</span></h1>
-      <p class="hero-lead">OptiMaxProAI connects the pieces of everyday life—meals, assets, plans, people and places—so you can make smarter decisions and enjoy more peace of mind.</p>
-      <div class="hero-actions">
+      <h1>Spend less time managing life—and more time living it.</h1>
+      <p class="hero-lead">OptiMaxProAI brings the important parts of your everyday life together with intelligent technology that remembers what matters—so you can make smarter decisions, reduce everyday stress, and spend more time doing what you love.</p>
+<div class="hero-actions">
         <a href="#why" class="btn btn-primary">See How It Works →</a>
         <a href="#live" class="btn">Explore the Apps</a>
       </div>
@@ -706,16 +797,16 @@ section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .secti
 
     <div class="vision-wrap">
       <div class="future-grid">
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Personal Growth</div><h3>OptiMentumAI</h3><p>An AI accountability partner that turns goals into daily actions and keeps momentum visible.</p><a class="future-link" href="#join" data-app="OptiMentumAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Business & Opportunity</div><h3>OptiGovAI</h3><p>Government-contracting intelligence that makes opportunity discovery and qualification easier to understand.</p><a class="future-link" href="#join" data-app="OptiGovAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Productivity & Business</div><h3>OptiFlowAI</h3><p>Turn repetitive manual processes into clearer, optimized digital workflows.</p><a class="future-link" href="#join" data-app="OptiFlowAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Family & Legacy</div><h3>OptiLegacyAI</h3><p>Capture life stories, family memories, wisdom and messages so what matters is preserved.</p><a class="future-link" href="#join" data-app="OptiLegacyAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Professional Growth</div><h3>OptiConnectAI</h3><p>A relationship-memory assistant that helps you remember who you met and when a follow-up matters.</p><a class="future-link" href="#join" data-app="OptiConnectAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Money & Lifestyle</div><h3>OptiSaveAI</h3><p>A smarter shopping companion focused on comparing choices and reducing unnecessary overspending.</p><a class="future-link" href="#join" data-app="OptiSaveAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Wellness & Lifestyle</div><h3>OptiSeniorAI</h3><p>A thoughtful AI companion for adults 60+ focused on goals, appointments, memories and easier technology.</p><a class="future-link" href="#join" data-app="OptiSeniorAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Work & Income</div><h3>OptiGigAI</h3><p>A side-hustle opportunity matcher designed around your skills, available time and priorities.</p><a class="future-link" href="#join" data-app="OptiGigAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><div class="map-art"><div class="route"></div><div class="map-dot"></div><div class="map-dot end"></div></div><div class="future-body"><div class="future-type">Productivity & Lifestyle</div><h3>OptiRouteAI</h3><p>AI-powered route and schedule optimization focused on the right place, right time and smarter path.</p><a class="future-link" href="#join" data-app="OptiRouteAI">I’m interested →</a></div></article>
-        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Entertainment & Lifestyle</div><h3>OptiStreamAI</h3><p>A personalized entertainment companion that helps you decide what to watch, read or listen to next.</p><a class="future-link" href="#join" data-app="OptiStreamAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Personal Growth</div><h3>OptiMentumAI</h3><p>An AI accountability partner that turns goals into daily actions and keeps momentum visible.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Business & Opportunity</div><h3>OptiGovAI</h3><p>Government-contracting intelligence that makes opportunity discovery and qualification easier to understand.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Productivity & Business</div><h3>OptiFlowAI</h3><p>Turn repetitive manual processes into clearer, optimized digital workflows.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Family & Legacy</div><h3>OptiLegacyAI</h3><p>Capture life stories, family memories, wisdom and messages so what matters is preserved.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Professional Growth</div><h3>OptiConnectAI</h3><p>A relationship-memory assistant that helps you remember who you met and when a follow-up matters.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Money & Lifestyle</div><h3>OptiSaveAI</h3><p>A smarter shopping companion focused on comparing choices and reducing unnecessary overspending.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Wellness & Lifestyle</div><h3>OptiSeniorAI</h3><p>A thoughtful AI companion for adults 60+ focused on goals, appointments, memories and easier technology.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Work & Income</div><h3>OptiGigAI</h3><p>A side-hustle opportunity matcher designed around your skills, available time and priorities.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><div class="map-art"><div class="route"></div><div class="map-dot"></div><div class="map-dot end"></div></div><div class="future-body"><div class="future-type">Productivity & Lifestyle</div><h3>OptiRouteAI</h3><p>AI-powered route and schedule optimization focused on the right place, right time and smarter path.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Entertainment & Lifestyle</div><h3>OptiStreamAI</h3><p>A personalized entertainment companion that helps you decide what to watch, read or listen to next.</p><form class="wait"><input type="email" placeholder="Email for updates" required><button>Notify Me</button></form></div></article>
       </div>
     </div>
   </div>
@@ -727,24 +818,11 @@ section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .secti
       <div class="kicker">Stay in the circle</div>
       <h2>Ready to remember more, stress less and make smarter everyday decisions?</h2>
       <p>Join the OptiMaxProAI list for product updates, beta openings, new launches and opportunities to help shape what comes next.</p>
-      <div class="join-hint">Tell us what you're most excited about (optional) — it helps us decide what to build next.</div>
-      <div id="interestGrid" class="interest-grid">
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiMentumAI">OptiMentumAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiGovAI">OptiGovAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiFlowAI">OptiFlowAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiLegacyAI">OptiLegacyAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiConnectAI">OptiConnectAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiSaveAI">OptiSaveAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiSeniorAI">OptiSeniorAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiGigAI">OptiGigAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiRouteAI">OptiRouteAI</label>
-        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiStreamAI">OptiStreamAI</label>
-      </div>
       <form id="masterForm" class="master-wait">
         <input type="email" placeholder="Enter your email address" required>
         <button class="btn btn-primary" type="submit">Join the Waitlist →</button>
       </form>
-      <div id="masterSuccess" class="success">Thanks — you’re on the list. We’ll email you as new apps and features go live.</div>
+      <div id="masterSuccess" class="success">Thanks — you’re on the mockup waitlist.</div>
     </div>
   </div>
 </section>
@@ -752,16 +830,18 @@ section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .secti
 <footer>
   <div class="container footer-grid">
     <div class="brand-word-wrap footer-word-wrap">
-      <div class="brand-wordmark footer-wordmark"><span class="bw-opti">Opti</span><span class="bw-max">MaxPro</span><span class="bw-ai">AI</span></div>
-      <span class="brand-word-sub footer-word-sub">Optimize Everything. Maximize Life.</span>
-    </div>
+  <div class="brand-wordmark footer-wordmark">
+    <span class="bw-opti">Opti</span><span class="bw-max">MaxPro</span><span class="bw-ai">AI</span>
+  </div>
+  <span class="brand-word-sub footer-word-sub">Optimize Everything. Maximize Life.</span>
+</div>
     <div class="footer-links">
       <a href="#live">Live Apps</a>
       <a href="#circle">OptiCircleAI</a>
       <a href="#vision">The Bigger Vision</a>
       <a href="#join">Waitlist</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
     </div>
   </div>
 </footer>
@@ -769,16 +849,16 @@ section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .secti
 <script>
 
 const appShowcase = [
-  {name:"OptiEatsAI",category:"Dining & Lifestyle",copy:"Remember what you loved, what you didn’t, and recommendations shared by friends—so the next meal is easier to choose.",photo:"https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiAssetsAI",category:"Home & Asset Intelligence",copy:"Keep maintenance, receipts, records and warranties connected to the things you own instead of scattered across your life.",photo:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiMentumAI",category:"Personal Growth",copy:"Turn goals into daily action, keep momentum visible and make progress easier to remember and celebrate.",photo:"https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiGovAI",category:"Business & Opportunity",copy:"Make government-contracting opportunities easier to discover, understand and qualify before deciding what deserves your time.",photo:"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiFlowAI",category:"Productivity & Business",copy:"Turn repetitive manual work into clearer workflows so teams spend less time managing friction and more time moving forward.",photo:"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiLegacyAI",category:"Family & Legacy",copy:"Preserve stories, memories, wisdom and messages so the things your family values do not disappear with time.",photo:"https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiConnectAI",category:"Professional Growth",copy:"Remember who you met, what mattered in the conversation and when a thoughtful follow-up could strengthen the relationship.",photo:"https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiSaveAI",category:"Money & Lifestyle",copy:"Compare choices, remember what you buy and reduce avoidable overspending when everyday purchase decisions add up.",photo:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiSeniorAI",category:"Wellness & Lifestyle",copy:"A thoughtful companion for adults 60+ that keeps goals, appointments and memories useful without making technology feel complicated.",photo:"https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=1100&q=86"},
-  {name:"OptiGigAI",category:"Work & Income",copy:"Match available time and skills with income opportunities so useful work is easier to find when you need it.",photo:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiEatsAI",category:"Dining & Lifestyle",copy:"Remember what you loved, what you didn’t, and recommendations shared by friends—so the next meal is easier to choose.",photo:"https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiAssetsAI",category:"Home & Asset Intelligence",copy:"Keep maintenance, receipts, records and warranties connected to the things you own instead of scattered across your life.",photo:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiMentumAI",category:"Personal Growth",copy:"Turn goals into daily action, keep momentum visible and make progress easier to remember and celebrate.",photo:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiGovAI",category:"Business & Opportunity",copy:"Make government-contracting opportunities easier to discover, understand and qualify before deciding what deserves your time.",photo:"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiFlowAI",category:"Productivity & Business",copy:"Turn repetitive manual work into clearer workflows so teams spend less time managing friction and more time moving forward.",photo:"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiLegacyAI",category:"Family & Legacy",copy:"Preserve stories, memories, wisdom and messages so the things your family values do not disappear with time.",photo:"https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiConnectAI",category:"Professional Growth",copy:"Remember who you met, what mattered in the conversation and when a thoughtful follow-up could strengthen the relationship.",photo:"https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiSaveAI",category:"Money & Lifestyle",copy:"Compare choices, remember what you buy and reduce avoidable overspending when everyday purchase decisions add up.",photo:"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiSeniorAI",category:"Wellness & Lifestyle",copy:"A thoughtful companion for adults 60+ that keeps goals, appointments and memories useful without making technology feel complicated.",photo:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1100&q=88"},
+  {name:"OptiGigAI",category:"Work & Income",copy:"Match available time and skills with income opportunities so useful work is easier to find when you need it.",photo:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=88"},
   {name:"OptiRouteAI",category:"Productivity & Lifestyle",copy:"Turn a busy day into a smarter route—right place, right time, better path, less unnecessary driving.",visual:"route"},
   {name:"OptiStreamAI",category:"Entertainment & Lifestyle",copy:"Remember what you enjoy and make the next choice easier across streaming, books, podcasts, music and more.",visual:"stream"}
 ];
@@ -859,23 +939,20 @@ const revealObserver = new IntersectionObserver(entries=>{
 },{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 
-document.querySelectorAll(".future-link").forEach(link=>{
-  link.addEventListener("click",()=>{
-    const app=link.dataset.app;
-    const box=document.querySelector(`#interestGrid input[value="${app}"]`);
-    if(box){
-      box.checked=true;
-      link.classList.add("added");
-      link.textContent="Added to your waitlist picks ✓";
-    }
+document.querySelectorAll(".wait").forEach(form=>{
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    const btn=form.querySelector("button");
+    const old=btn.textContent;
+    btn.textContent="You're on the list ✓";
+    btn.disabled=true;
+    setTimeout(()=>{btn.textContent=old;btn.disabled=false;form.reset()},2200);
   });
 });
 document.getElementById("masterForm").addEventListener("submit",e=>{
   e.preventDefault();
   document.getElementById("masterSuccess").style.display="block";
   e.currentTarget.reset();
-  document.querySelectorAll("#interestGrid input").forEach(cb=>cb.checked=false);
-  document.querySelectorAll(".future-link.added").forEach(l=>{l.classList.remove("added");l.textContent="I\u2019m interested \u2192";});
 });
 </script>
 </body>
