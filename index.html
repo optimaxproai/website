@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OptiMaxProAI — Launch Edition</title>
+<meta name="description" content="AI that remembers what matters—so you don't have to." />
+<style>
+:root{
+  --bg:#070a10;
+  --panel:#101622;
+  --panel2:#151d2c;
+  --panel3:#0c111b;
+  --text:#f7f9fc;
+  --muted:#aeb7c7;
+  --purple:#6B2BDD;
+  --violet:#9B6CFF;
+  --green:#28B463;
+  --lime:#A6E97A;
+  --cyan:#22C7E8;
+  --line:rgba(255,255,255,.10);
+  --softline:rgba(255,255,255,.06);
+  --shadow:0 24px 70px rgba(0,0,0,.34);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(107,43,221,.18),transparent 24%),
+    radial-gradient(circle at 90% 4%,rgba(40,180,99,.12),transparent 22%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+img{display:block;max-width:100%}
+.container{width:min(1180px,92vw);margin:auto}
+.kicker{
+  font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:900;color:var(--lime);margin-bottom:12px
+}
+h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.045em}
+h1{font-size:clamp(2.95rem,5.25vw,5.45rem);max-width:720px}
+h2{font-size:clamp(2.5rem,4.6vw,4.7rem)}
+p{margin:0}
+.grad{
+  background:linear-gradient(90deg,#fff 0%,var(--violet) 46%,var(--green) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.nav{
+  position:sticky;top:0;z-index:1000;height:82px;
+  background:rgba(7,10,16,.87);border-bottom:1px solid var(--softline);
+  backdrop-filter:blur(16px)
+}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.brand-wrap{display:flex;align-items:center;gap:12px;min-width:245px}
+.brand-mark{
+  width:43px;height:43px;border-radius:50%;position:relative;flex:0 0 auto;
+  background:conic-gradient(from 30deg,var(--green),var(--cyan),var(--violet),var(--purple),var(--green));
+  box-shadow:0 0 24px rgba(107,43,221,.28)
+}
+.brand-mark:before{
+  content:"";position:absolute;inset:7px;border-radius:50%;background:var(--bg)
+}
+.brand-mark:after{
+  content:"";position:absolute;left:19px;top:2px;width:9px;height:39px;
+  border-radius:999px;background:linear-gradient(var(--green),var(--cyan));transform:rotate(42deg)
+}
+.wordmark{font-weight:950;font-size:1.72rem;letter-spacing:-.06em;line-height:1}
+.wordmark .opti{color:#fff}
+.wordmark .max{background:linear-gradient(90deg,#8f66ff,#ad76ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wordmark .ai{background:linear-gradient(90deg,var(--green),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{display:block;margin-top:4px;font-size:.52rem;text-transform:uppercase;letter-spacing:.16em;color:#c3cad5;font-weight:800}
+.navlinks{display:flex;align-items:center;gap:23px;color:#d4dbe5;font-size:.9rem;font-weight:760}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 19px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);color:#fff;font-weight:850;cursor:pointer;
+  transition:.25s ease
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 13px 34px rgba(0,0,0,.22)}
+.btn-primary{border:none;background:linear-gradient(90deg,var(--purple),var(--green))}
+.hero{
+  min-height:690px;padding:58px 0 58px;display:flex;align-items:center;position:relative;overflow:hidden
+}
+.hero:after{
+  content:"";position:absolute;width:590px;height:590px;border-radius:50%;right:-130px;top:95px;
+  background:radial-gradient(circle,rgba(107,43,221,.23),rgba(34,199,232,.08) 40%,rgba(40,180,99,.06) 55%,transparent 70%);
+  animation:pulse 6s ease-in-out infinite;pointer-events:none
+}
+@keyframes pulse{50%{transform:scale(1.06);opacity:.84}}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center;position:relative;z-index:2}
+.hero-copy{position:relative;z-index:3}
+.hero-lead{font-size:1.14rem;color:#b7c0ce;max-width:650px;margin-top:23px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.status{margin-top:19px;font-size:.87rem;color:#8894a7}
+.pain-stage{
+  min-height:500px;position:relative;border-radius:34px;
+  background:linear-gradient(145deg,rgba(20,27,42,.82),rgba(10,14,22,.72));
+  border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;padding:28px
+}
+.pain-stage:before{
+  content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 78% 24%,rgba(40,180,99,.13),transparent 24%),
+    radial-gradient(circle at 30% 72%,rgba(107,43,221,.20),transparent 28%);
+}
+.pain-label{position:relative;z-index:2;color:#92a0b4;font-size:.82rem}
+.pain-card{
+  position:relative;z-index:2;margin-top:18px;padding:24px;border-radius:24px;
+  background:rgba(7,10,16,.62);border:1px solid var(--line);min-height:158px;
+  display:flex;gap:16px;align-items:center;transition:.45s ease
+}
+.pain-icon{
+  width:56px;height:56px;border-radius:18px;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;font-size:1.55rem;
+  background:linear-gradient(135deg,rgba(107,43,221,.32),rgba(40,180,99,.22))
+}
+.pain-text{font-size:1.37rem;font-weight:850;line-height:1.26}
+.dots{display:flex;gap:7px;justify-content:center;margin-top:14px;position:relative;z-index:2}
+.dot{width:7px;height:7px;border-radius:50%;background:#4b5565;transition:.3s ease}
+.dot.active{background:var(--green);transform:scale(1.3)}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;position:relative;z-index:2}
+.mini{
+  min-height:94px;padding:14px;border-radius:17px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);font-size:.78rem;color:#d5dbe4
+}
+.mini b{display:block;color:#fff;margin-bottom:5px}
+.solution-line{
+  position:relative;z-index:2;margin-top:20px;font-size:1.08rem;text-align:center;font-weight:850;
+  color:#d9e2ee
+}
+.solution-line span{background:linear-gradient(90deg,var(--violet),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.section{padding:96px 0}
+.section.alt{background:#0c111a}
+.section-title{max-width:960px}
+.section-copy{font-size:1.06rem;color:var(--muted);max-width:760px;margin-top:18px}
+.problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+.problem-card{padding:21px;border-radius:22px;background:#111827;border:1px solid var(--line);min-height:150px}
+.problem-card h3{font-size:1.08rem;margin-top:12px}.problem-card p{color:#9da8b8;font-size:.9rem;margin-top:7px}
+.problem-icon{
+  width:41px;height:41px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(107,43,221,.18),rgba(40,180,99,.15))
+}
+.bridge{
+  margin-top:25px;padding:25px;border-radius:24px;
+  background:linear-gradient(90deg,rgba(107,43,221,.16),rgba(40,180,99,.10));
+  border:1px solid rgba(155,108,255,.18);font-size:1.28rem;font-weight:850
+}
+.circle-panel{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px;
+  border-radius:32px;padding:38px;background:linear-gradient(135deg,#111827,#171425);border:1px solid var(--line)
+}
+.network{position:relative;min-height:470px}
+.network svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.network-line{stroke:url(#lineGrad);stroke-width:2.2;stroke-dasharray:7 7;animation:dash 8s linear infinite;opacity:.68}
+@keyframes dash{to{stroke-dashoffset:-100}}
+.network-core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(135deg,var(--purple),var(--green));font-weight:950;
+  box-shadow:0 0 72px rgba(107,43,221,.38);z-index:4
+}
+.network-node{
+  position:absolute;width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#192235;border:1px solid var(--line);font-weight:850;z-index:4;
+  box-shadow:0 14px 34px rgba(0,0,0,.24);animation:nodeFloat 5.5s ease-in-out infinite
+}
+@keyframes nodeFloat{50%{transform:translateY(-7px)}}
+.nn1{left:4%;top:13%}.nn2{right:4%;top:14%;animation-delay:1s}.nn3{left:8%;bottom:10%;animation-delay:2s}.nn4{right:8%;bottom:10%;animation-delay:3s}
+.network-caption{
+  position:absolute;left:50%;bottom:5%;transform:translateX(-50%);font-size:.78rem;color:#9eabba;z-index:4
+}
+.circle-benefits{display:grid;gap:12px;margin-top:24px}
+.circle-benefit{display:flex;gap:11px;padding:13px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid var(--softline)}
+.circle-benefit i{font-style:normal;color:var(--lime);font-weight:950}
+.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.app-card{border-radius:30px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);position:relative}
+.app-purple{background:linear-gradient(150deg,#351553,#621fb8 42%,#141521)}
+.app-green{background:linear-gradient(150deg,#0f321e,#1f7440 42%,#141921)}
+.app-grid{display:grid;grid-template-columns:minmax(0,1fr) 205px;gap:24px;padding:31px;min-height:560px}
+.app-copy h3{font-size:2.8rem}
+.app-desc{color:#e1e7ef;font-size:1.02rem;margin-top:13px}
+.app-points{display:grid;gap:11px;margin-top:22px}
+.app-point{display:flex;gap:9px;color:#edf2f8;font-size:.92rem}
+.app-point b{color:var(--lime)}
+.phone{align-self:center;width:205px;height:420px;border-radius:37px;background:#070a10;border:7px solid rgba(255,255,255,.20);overflow:hidden}
+.phone-screen{height:100%;padding:48px 14px 15px;background:linear-gradient(180deg,#141b29,#090d14)}
+.phone-brand{font-size:.82rem;font-weight:900}.phone-brand span{color:var(--green)}
+.phone-screen h4{font-size:1.4rem;margin:17px 0 8px}
+.search{padding:10px 11px;border-radius:12px;background:#20283a;color:#8995a8;font-size:.7rem}
+.ui-card{margin-top:13px;padding:10px;border-radius:16px;background:#172032;border:1px solid rgba(255,255,255,.07)}
+.food-img{height:120px;border-radius:13px;background:url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=85') center/cover}
+.home-img{height:120px;border-radius:13px;background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=700&q=85') center/cover}
+.ui-title{font-size:.78rem;font-weight:850;margin-top:7px}.ui-meta{font-size:.66rem;color:#aeb8c7;margin-top:2px}
+.rating{margin-top:11px;padding:9px 11px;border-radius:13px;background:rgba(255,255,255,.07);font-size:.74rem}
+.rating strong{color:#ffd966}
+.app-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:27px}
+.people-grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:16px;margin-top:35px}
+.person{
+  position:relative;min-height:420px;border-radius:27px;overflow:hidden;background-size:cover;background-position:center;
+  border:1px solid var(--softline);box-shadow:var(--shadow)
+}
+.person:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 28%,rgba(4,7,12,.91))}
+.person-text{position:absolute;z-index:2;left:23px;right:23px;bottom:22px}
+.person-text h3{font-size:1.48rem}.person-text p{margin-top:7px;color:#e0e5ed}
+.p1{background-image:url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1100&q=85')}
+.p2{background-image:url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=900&q=85')}
+.p3{background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=85')}
+.vision-wrap{
+  margin-top:36px;border-radius:32px;padding:34px;background:
+  radial-gradient(circle at 90% 10%,rgba(40,180,99,.13),transparent 24%),
+  radial-gradient(circle at 10% 0%,rgba(107,43,221,.20),transparent 28%),#111827;border:1px solid var(--line)
+}
+.future-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px}
+.future-card{
+  position:relative;overflow:hidden;min-height:245px;border-radius:22px;background:#171f2e;border:1px solid var(--line);
+  padding:23px 205px 22px 23px
+}
+.future-card:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(17,24,39,.99) 0%,rgba(17,24,39,.93) 55%,rgba(17,24,39,.18) 100%)}
+.future-photo{
+  position:absolute;right:0;top:0;width:48%;height:100%;object-fit:cover;opacity:.48;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,black 40%);mask-image:linear-gradient(90deg,transparent 0%,black 40%);
+  transition:.4s ease
+}
+.future-card:hover .future-photo{opacity:.68;transform:scale(1.035)}
+.future-body{position:relative;z-index:2}
+.future-type{font-size:.7rem;text-transform:uppercase;letter-spacing:.11em;font-weight:900;color:var(--lime)}
+.future-card h3{font-size:1.55rem;margin-top:7px}
+.future-card p{font-size:.87rem;color:#d0d8e4;margin-top:8px}
+.wait{display:flex;gap:5px;background:#fff;padding:4px;border-radius:999px;margin-top:14px;max-width:365px}
+.wait input{flex:1;min-width:0;border:0;outline:0;padding:0 10px;font-size:.76rem}
+.wait button{border:0;border-radius:999px;padding:9px 11px;background:linear-gradient(90deg,var(--purple),var(--green));color:#fff;font-size:.72rem;font-weight:900;cursor:pointer}
+.future-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.8rem;font-weight:850;
+  color:var(--lime);border:1px solid rgba(166,233,122,.35);border-radius:999px;padding:9px 15px;
+  background:rgba(166,233,122,.08);cursor:pointer;transition:.25s ease
+}
+.future-link:hover{background:rgba(166,233,122,.16);transform:translateY(-1px)}
+.future-link.added{color:#fff;background:linear-gradient(90deg,var(--purple),var(--green));border-color:transparent}
+.interest-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:650px;margin:22px auto 0;text-align:left
+}
+.interest-chip{
+  display:flex;align-items:center;gap:8px;padding:10px 13px;border-radius:14px;
+  background:rgba(255,255,255,.55);border:1px solid #dedfe7;font-size:.82rem;color:#333c4a;font-weight:700;cursor:pointer
+}
+.interest-chip input{width:15px;height:15px;accent-color:#6B2BDD}
+.join-hint{margin-top:20px;font-size:.85rem;color:#7c8798;text-align:center}
+@media(max-width:720px){.interest-grid{grid-template-columns:repeat(2,1fr)}}
+.map-art{position:absolute;right:0;top:0;width:48%;height:100%;opacity:.72;background:linear-gradient(135deg,rgba(107,43,221,.15),rgba(40,180,99,.12)),repeating-linear-gradient(24deg,transparent 0 42px,rgba(255,255,255,.045) 43px 45px),#283243;-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 40%);mask-image:linear-gradient(90deg,transparent 0%,black 40%)}
+.route{position:absolute;right:32px;top:45px;width:210px;height:120px;border:7px solid transparent;border-top-color:var(--green);border-right-color:var(--cyan);border-radius:50%;transform:rotate(-12deg)}
+.map-dot{position:absolute;width:17px;height:17px;border-radius:50%;background:var(--violet);right:205px;bottom:48px;box-shadow:0 0 0 5px rgba(255,255,255,.82)}
+.map-dot.end{right:29px;top:35px;bottom:auto;background:var(--green)}
+.cta{
+  padding:68px 30px;border-radius:32px;text-align:center;
+  background:linear-gradient(135deg,rgba(107,43,221,.18),rgba(40,180,99,.11)),#111827;border:1px solid var(--line)
+}
+.cta h2{max-width:900px;margin:auto}.cta p{max-width:690px;margin:17px auto 0;color:#aeb8c7}
+.master-wait{display:flex;max-width:650px;margin:25px auto 0;background:#fff;padding:6px;border-radius:999px}
+.master-wait input{flex:1;min-width:0;border:0;outline:0;padding:0 15px}
+.success{display:none;margin-top:12px;color:var(--lime);font-size:.88rem}
+footer{padding:46px 0 58px;border-top:1px solid var(--softline)}
+.footer-grid{display:flex;justify-content:space-between;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.footer-links{display:flex;gap:22px;flex-wrap:wrap;color:#b9c2cf}
+.reveal{opacity:0;transform:translateY(24px);transition:.72s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:1000px){
+  .navlinks{display:none}
+  .hero-grid,.circle-panel{grid-template-columns:1fr}
+  .hero{padding-top:54px}
+  .pain-stage{min-height:450px}
+  .problem-grid{grid-template-columns:repeat(2,1fr)}
+  .live-grid{grid-template-columns:1fr}
+  .people-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .brand-wrap{min-width:auto}.wordmark{font-size:1.45rem}.brand-mark{width:38px;height:38px}.tagline{display:none}
+  h1{font-size:3.2rem}
+  .hero{min-height:auto;padding:62px 0}
+  .hero-grid{gap:30px}
+  .mini-grid{grid-template-columns:1fr}
+  .problem-grid,.future-grid{grid-template-columns:1fr}
+  .app-grid{grid-template-columns:1fr;padding:25px}
+  .phone{justify-self:center;margin-top:10px}
+  .future-card{padding:22px;min-height:305px}
+  .future-photo,.map-art{width:100%;height:44%;top:auto;bottom:0;-webkit-mask-image:linear-gradient(180deg,transparent 0%,black 68%);mask-image:linear-gradient(180deg,transparent 0%,black 68%)}
+  .future-card:before{background:linear-gradient(180deg,rgba(17,24,39,1) 0%,rgba(17,24,39,.97) 60%,rgba(17,24,39,.38) 100%)}
+  .master-wait{display:grid;border-radius:20px}
+}
+
+.actual-logo-wrap{min-width:285px}
+.actual-logo{height:72px;width:auto;max-width:285px;object-fit:contain;filter:drop-shadow(0 8px 20px rgba(0,0,0,.22))}
+.footer-actual-logo{height:84px;max-width:330px}
+.hero{
+  background:
+    linear-gradient(100deg,rgba(48,19,82,.48) 0%,rgba(11,15,24,.92) 47%,rgba(9,37,35,.52) 100%),
+    radial-gradient(circle at 13% 30%,rgba(107,43,221,.22),transparent 28%),
+    radial-gradient(circle at 86% 32%,rgba(40,180,99,.17),transparent 26%),
+    #080b12;
+}
+#why{
+  background:
+    radial-gradient(circle at 10% 15%,rgba(34,199,232,.055),transparent 24%),
+    linear-gradient(180deg,#0d121b,#11151d);
+}
+#circle{
+  background:
+    radial-gradient(circle at 77% 44%,rgba(107,43,221,.12),transparent 30%),
+    linear-gradient(135deg,#090e16 0%,#111526 58%,#0b1714 100%);
+}
+#live{
+  background:
+    radial-gradient(circle at 18% 25%,rgba(107,43,221,.12),transparent 25%),
+    radial-gradient(circle at 85% 65%,rgba(40,180,99,.09),transparent 25%),
+    #0c1018;
+}
+#vision{
+  background:
+    linear-gradient(180deg,#0b1119 0%,#111827 48%,#0a1115 100%);
+}
+.pain-stage{padding:22px;min-height:520px}
+.app-showcase{position:relative;z-index:2;margin-top:16px;border-radius:25px;overflow:hidden;background:rgba(6,9,15,.62);border:1px solid var(--line);min-height:350px}
+.showcase-photo{height:205px;background-size:cover;background-position:center;position:relative;transition:opacity .35s ease,transform .45s ease}
+.showcase-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,13,.03),rgba(5,8,13,.88))}
+.showcase-body{position:relative;margin-top:-72px;padding:0 22px 20px;z-index:3}
+.showcase-category{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--lime);font-weight:900}
+.showcase-name{font-size:1.65rem;margin-top:5px;letter-spacing:-.035em}
+.showcase-copy{margin-top:8px;color:#cbd4e0;font-size:.92rem;min-height:66px}
+.showcase-controls{display:flex;justify-content:space-between;align-items:center;margin-top:15px}
+.showcase-arrows{display:flex;gap:7px}
+.showcase-arrow{width:35px;height:35px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:white;cursor:pointer}
+.showcase-dots{display:flex;gap:5px;flex-wrap:wrap;max-width:230px;justify-content:center}
+.showcase-dot{width:6px;height:6px;border-radius:50%;background:#4b5565;cursor:pointer}
+.showcase-dot.active{background:var(--green);transform:scale(1.25)}
+.pain-stage .pain-card,.pain-stage .dots,.pain-stage .mini-grid,.pain-stage .solution-line{display:none}
+.pain-stage .pain-label{font-size:.74rem;text-transform:uppercase;letter-spacing:.11em;color:#8f9caf;font-weight:800}
+@media(max-width:1000px){
+  .actual-logo-wrap{min-width:auto}
+  .actual-logo{height:64px;max-width:250px}
+}
+@media(max-width:720px){
+  .actual-logo{height:54px;max-width:220px}
+  .hero{padding-top:42px}
+  h1{font-size:2.85rem}
+  .pain-stage{min-height:500px}
+}
+
+
+.network-core{
+  flex-direction:column;
+  gap:5px;
+  padding:18px;
+  line-height:1.05;
+}
+.core-title{
+  display:block;
+  font-size:1.18rem;
+  font-weight:950;
+  color:#fff;
+  letter-spacing:-.035em;
+}
+.core-subtitle{
+  display:block;
+  font-size:.72rem;
+  font-weight:650;
+  color:#d9f7df;
+  letter-spacing:.035em;
+}
+
+
+/* V10: ONLY logo treatment + light navigation band */
+.nav{
+  background:#f7f8fa !important;
+  border-bottom:1px solid #e3e6eb !important;
+  box-shadow:0 8px 26px rgba(17,24,39,.06);
+}
+.navlinks{color:#222936 !important}
+.navlinks > a:not(.btn){color:#222936 !important}
+.brand-lockup-link{
+  display:flex;align-items:center;
+  width:300px;height:70px;
+}
+.brand-lockup-img{
+  width:100%;height:100%;object-fit:contain;display:block;
+}
+.footer-brand-lockup{width:310px}
+.footer-lockup-img{
+  width:310px;height:auto;border-radius:18px;
+}
+@media(max-width:720px){
+  .brand-lockup-link{width:230px;height:60px}
+  .footer-brand-lockup,.footer-lockup-img{width:250px}
+}
+
+
+/* V11: ONLY approved changes — wordmark, slideshow imagery, and background breakup */
+.brand-word-wrap{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none}
+.brand-wordmark{font-weight:950;font-size:2rem;letter-spacing:-.06em;line-height:.95}
+.bw-opti{color:#111827}
+.bw-max{background:linear-gradient(90deg,#6B2BDD,#9B6CFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bw-ai{background:linear-gradient(90deg,#28B463,#22C7E8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand-word-sub{margin-top:5px;font-size:.57rem;text-transform:uppercase;letter-spacing:.16em;color:#5f6877;font-weight:850}
+.footer-wordmark .bw-opti{color:#fff}
+.footer-word-sub{color:#cbd3df}
+
+/* Introduce light-space breaks without altering layout/content */
+#why{
+  background:
+    radial-gradient(circle at 12% 12%,rgba(107,43,221,.07),transparent 22%),
+    radial-gradient(circle at 88% 18%,rgba(40,180,99,.06),transparent 20%),
+    #f7f8fb !important;
+  color:#101522;
+}
+#why .kicker{color:#6B2BDD}
+#why .section-title,#why h3{color:#101522}
+#why .section-copy,#why .problem-card p{color:#667085}
+#why .problem-card{background:#fff;border-color:#e2e6ee;box-shadow:0 14px 32px rgba(26,36,58,.06)}
+#why .bridge{background:linear-gradient(90deg,rgba(107,43,221,.08),rgba(40,180,99,.08));border-color:#ded8f2;color:#1d2635}
+
+section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join){
+  background:#f7f8fb;
+  color:#101522;
+}
+section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .kicker{color:#6B2BDD}
+section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .section-title,
+section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) h3{color:#101522}
+section.section:not(#why):not(#circle):not(#live):not(#vision):not(#join) .section-copy{color:#667085}
+
+/* Ensure people image captions remain white on image overlays */
+.person-text h3,.person-text p{color:#fff !important}
+
+/* Hero slideshow special visuals */
+.showcase-photo{overflow:hidden}
+.stream-collage{
+  position:absolute;inset:0;display:grid;
+  grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;
+  padding:8px;background:#0c1119;
+}
+.stream-tile{background-size:cover;background-position:center;border-radius:12px;position:relative;overflow:hidden}
+.stream-tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.25))}
+.stream-tv{background-image:url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=600&q=86')}
+.stream-book{background-image:url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=600&q=86')}
+.stream-podcast{background-image:url('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=600&q=86')}
+.stream-headphones{background-image:url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=86')}
+
+.route-showcase{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(135deg,rgba(107,43,221,.08),rgba(40,180,99,.08)),
+    repeating-linear-gradient(22deg,transparent 0 42px,rgba(255,255,255,.055) 43px 45px),
+    #263142;
+}
+.route-road{position:absolute;height:7px;border-radius:999px;background:linear-gradient(90deg,#9B6CFF,#22C7E8,#28B463);transform-origin:left center;box-shadow:0 0 12px rgba(34,199,232,.28)}
+.rr1{width:150px;left:70px;top:145px;transform:rotate(-18deg)}
+.rr2{width:160px;left:205px;top:99px;transform:rotate(22deg)}
+.rr3{width:145px;left:350px;top:155px;transform:rotate(-28deg)}
+.stop{
+  position:absolute;width:27px;height:27px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;color:#172033;font-size:.72rem;font-weight:950;
+  box-shadow:0 0 0 6px rgba(107,43,221,.18),0 8px 18px rgba(0,0,0,.25);
+}
+.st1{left:54px;top:129px}.st2{left:199px;top:82px}.st3{left:342px;top:142px}.st4{left:472px;top:78px}
+.route-label{position:absolute;right:18px;bottom:14px;padding:7px 10px;border-radius:999px;background:rgba(8,12,18,.76);border:1px solid rgba(255,255,255,.1);font-size:.7rem;color:#e7eef7}
+
+/* Slightly different dark tones across dark sections */
+#circle{background:linear-gradient(135deg,#0a0f18 0%,#15142a 60%,#0b1915 100%) !important}
+#live{background:linear-gradient(180deg,#11131a 0%,#0b1119 100%) !important}
+#vision{background:linear-gradient(135deg,#0d1420 0%,#151b2b 52%,#0b1715 100%) !important}
+#join{background:#f7f8fb;color:#101522}
+#join .cta{background:linear-gradient(135deg,#f0eaff,#edf9f0);border-color:#dedfe7}
+#join .kicker{color:#6B2BDD}
+#join h2{color:#101522}
+#join p{color:#667085}
+
+@media(max-width:720px){
+  .brand-wordmark{font-size:1.65rem}
+  .brand-word-sub{display:none}
+  .route-road{transform:scale(.8)}
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand-word-wrap">
+      <div class="brand-wordmark"><span class="bw-opti">Opti</span><span class="bw-max">MaxPro</span><span class="bw-ai">AI</span></div>
+      <span class="brand-word-sub">Optimize Everything. Maximize Life.</span>
+    </a>
+    <div class="navlinks">
+      <a href="#why">Why It Matters</a>
+      <a href="#circle">OptiCircleAI</a>
+      <a href="#live">Live Apps</a>
+      <a href="#vision">The Bigger Vision</a>
+      <a class="btn btn-primary" href="#join">Join the Waitlist</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="kicker">Your life. Remembered.</div>
+      <h1>AI that remembers what matters—<span class="grad">so you don’t have to.</span></h1>
+      <p class="hero-lead">OptiMaxProAI connects the pieces of everyday life—meals, assets, plans, people and places—so you can make smarter decisions and enjoy more peace of mind.</p>
+      <div class="hero-actions">
+        <a href="#why" class="btn btn-primary">See How It Works →</a>
+        <a href="#live" class="btn">Explore the Apps</a>
+      </div>
+      <div class="status">OptiEatsAI is live • OptiAssetsAI is in beta</div>
+    </div>
+
+    <div class="pain-stage reveal">
+      <div class="pain-label">See how OptiMaxProAI can help across everyday life</div>
+
+      <div class="app-showcase">
+        <div id="showcasePhoto" class="showcase-photo"></div>
+        <div class="showcase-body">
+          <div id="showcaseCategory" class="showcase-category">Dining & Lifestyle</div>
+          <h3 id="showcaseName" class="showcase-name">OptiEatsAI</h3>
+          <p id="showcaseCopy" class="showcase-copy">Remember what you loved, what you didn’t, and recommendations shared by friends—so the next meal is easier to choose.</p>
+          <div class="showcase-controls">
+            <div class="showcase-arrows">
+              <button id="showPrev" class="showcase-arrow" type="button" aria-label="Previous app">←</button>
+              <button id="showNext" class="showcase-arrow" type="button" aria-label="Next app">→</button>
+            </div>
+            <div id="showcaseDots" class="showcase-dots"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-line" style="display:block"><span>One ecosystem. Focused experiences. Everyday value.</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="why" class="section alt">
+  <div class="container">
+    <div class="kicker">Why it matters</div>
+    <h2 class="section-title reveal">Small frustrations add up to wasted time, wasted money and avoidable stress.</h2>
+    <p class="section-copy reveal">The information is usually there. The problem is that it is scattered across texts, apps, receipts, photos, emails and memory. OptiMaxProAI is designed to turn those details into useful context.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal"><div class="problem-icon">🍽️</div><h3>Dining memory</h3><p>Remember what you loved—and what you didn’t—before you spend money ordering it again.</p></div>
+      <div class="problem-card reveal"><div class="problem-icon">🏠</div><h3>Ownership details</h3><p>Keep maintenance, receipts and warranty information closer to the things they belong to.</p></div>
+      <div class="problem-card reveal"><div class="problem-icon">👥</div><h3>Trusted recommendations</h3><p>Remember what friends and family recommended instead of losing it in a group chat.</p></div>
+      <div class="problem-card reveal"><div class="problem-icon">🧠</div><h3>Decision fatigue</h3><p>Use what you already know about yourself to make the next choice easier.</p></div>
+    </div>
+    <div class="bridge reveal">The goal is not more information. It is <span class="grad">better memory, better context and better decisions.</span></div>
+  </div>
+</section>
+
+<section id="circle" class="section">
+  <div class="container">
+    <div class="kicker">OptiCircleAI</div>
+    <h2 class="section-title reveal">Your life gets smarter when the right things connect.</h2>
+    <p class="section-copy reveal">OptiCircleAI is the concept that connects trusted context across the ecosystem. It is how your own history, the people you trust and your experiences can become more useful together.</p>
+
+    <div class="circle-panel reveal">
+      <div class="network">
+        <svg viewBox="0 0 500 470" aria-hidden="true">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" x2="1">
+              <stop offset="0%" stop-color="#9B6CFF"/>
+              <stop offset="50%" stop-color="#22C7E8"/>
+              <stop offset="100%" stop-color="#28B463"/>
+            </linearGradient>
+          </defs>
+          <line class="network-line" x1="250" y1="235" x2="86" y2="92"/>
+          <line class="network-line" x1="250" y1="235" x2="415" y2="95"/>
+          <line class="network-line" x1="250" y1="235" x2="105" y2="390"/>
+          <line class="network-line" x1="250" y1="235" x2="400" y2="390"/>
+        </svg>
+        <div class="network-core"><span class="core-title">OptiCircleAI</span><span class="core-subtitle">Trusted Context</span></div>
+        <div class="network-node nn1">You</div>
+        <div class="network-node nn2">Family</div>
+        <div class="network-node nn3">Friends</div>
+        <div class="network-node nn4">Community</div>
+        <div class="network-caption">Connections animate to show how context comes together.</div>
+      </div>
+
+      <div>
+        <div class="kicker">How it comes together</div>
+        <h3 style="font-size:2.3rem">The people and experiences you trust can make recommendations more useful.</h3>
+        <div class="circle-benefits">
+          <div class="circle-benefit"><i>✓</i><span><b>Trusted recommendations shared by friends</b> can be easier to remember and act on.</span></div>
+          <div class="circle-benefit"><i>✓</i><span><b>Your own history</b> can help personalize future decisions.</span></div>
+          <div class="circle-benefit"><i>✓</i><span><b>Shared experiences</b> can help families and friends remember what mattered.</span></div>
+          <div class="circle-benefit"><i>✓</i><span>The ecosystem can become more useful over time without requiring every experience to start from zero.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="live" class="section alt">
+  <div class="container">
+    <div class="kicker">Our live apps</div>
+    <h2 class="section-title reveal">Built for moments that matter.</h2>
+
+    <div class="live-grid">
+      <article class="app-card app-purple reveal">
+        <div class="app-grid">
+          <div class="app-copy">
+            <div class="kicker" style="color:#e2d8ff">Live now</div>
+            <h3>OptiEatsAI</h3>
+            <p class="app-desc">Your personal AI dining concierge remembers what you loved, what you didn’t, and why—so you can discover better, avoid disappointing meals and never waste money ordering something you already know you won’t enjoy.</p>
+            <div class="app-points">
+              <div class="app-point"><b>✓</b><span>Remember restaurants, meals and favorites</span></div>
+              <div class="app-point"><b>✓</b><span>Remember dislikes so you don’t repeat disappointing orders</span></div>
+              <div class="app-point"><b>✓</b><span>Capture photos, notes and receipts</span></div>
+              <div class="app-point"><b>✓</b><span>Trusted recommendations shared by friends</span></div>
+            </div>
+            <div class="app-actions">
+              <a class="btn btn-primary" href="https://optieatsai.optimaxproai.com" target="_blank">Explore OptiEatsAI ↗</a>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-brand">OptiEats<span>AI</span></div>
+              <h4>Where to tonight?</h4>
+              <div class="search">Ask your dining concierge…</div>
+              <div class="ui-card">
+                <div class="food-img"></div>
+                <div class="ui-title">Lobster linguine</div>
+                <div class="ui-meta">A favorite from Charleston</div>
+              </div>
+              <div class="rating"><strong>★★★★★</strong> Your rating: 5 stars</div>
+              <div class="ui-card">
+                <div class="ui-title">Skip next time</div>
+                <div class="ui-meta">You did not like the truffle risotto.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="app-card app-green reveal">
+        <div class="app-grid">
+          <div class="app-copy">
+            <div class="kicker" style="color:#dcffd2">In beta</div>
+            <h3>OptiAssetsAI</h3>
+            <p class="app-desc">A smarter way to organize the important details around your home, vehicles and other assets—so maintenance, records, receipts and warranties are easier to manage.</p>
+            <div class="app-points">
+              <div class="app-point"><b>✓</b><span>Organize homes, vehicles and important assets</span></div>
+              <div class="app-point"><b>✓</b><span>Track maintenance and important dates</span></div>
+              <div class="app-point"><b>✓</b><span>Keep receipts, records and warranties together</span></div>
+              <div class="app-point"><b>✓</b><span>Reduce the mental load of remembering it all</span></div>
+            </div>
+            <div class="app-actions">
+              <a class="btn" href="https://optiassetsai.optimaxproai.com" target="_blank">Visit the Beta ↗</a>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-brand">OptiAssets<span>AI</span></div>
+              <h4>My Assets</h4>
+              <div class="ui-card">
+                <div class="home-img"></div>
+                <div class="ui-title">Home</div>
+                <div class="ui-meta">Maintenance • records • warranties</div>
+              </div>
+              <div class="ui-card">
+                <div class="ui-title">What needs attention?</div>
+                <div class="ui-meta">HVAC filter • vehicle service • warranty</div>
+              </div>
+              <div class="ui-card">
+                <div class="ui-title">Status</div>
+                <div class="ui-meta">In beta • optiassetsai.optimaxproai.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="kicker">Built for everyday life</div>
+    <h2 class="section-title reveal">Useful should also feel human.</h2>
+    <p class="section-copy reveal">OptiMaxProAI is designed around real moments: planning together, enjoying time with people you care about, and using technology to make life easier rather than more complicated.</p>
+
+    <div class="people-grid">
+      <div class="person p1 reveal"><div class="person-text"><h3>Better moments together.</h3><p>Friends enjoying a meal, discovering something new and sharing recommendations that matter.</p></div></div>
+      <div class="person p2 reveal"><div class="person-text"><h3>Stay on top of what matters.</h3><p>Use your phone and a simple checklist to keep everyday responsibilities moving.</p></div></div>
+      <div class="person p3 reveal"><div class="person-text"><h3>Technology that fits into life.</h3><p>Useful tools should support people—not pull attention away from them.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="vision" class="section alt">
+  <div class="container">
+    <div class="kicker">The bigger vision</div>
+    <h2 class="section-title reveal">What else could OptiMaxProAI help you remember, organize or decide?</h2>
+    <p class="section-copy reveal">Explore future concepts across lifestyle, family, business, productivity and more. If one matters to you, join that app’s list and we’ll know there’s demand.</p>
+
+    <div class="vision-wrap">
+      <div class="future-grid">
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Personal Growth</div><h3>OptiMentumAI</h3><p>An AI accountability partner that turns goals into daily actions and keeps momentum visible.</p><a class="future-link" href="#join" data-app="OptiMentumAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Business & Opportunity</div><h3>OptiGovAI</h3><p>Government-contracting intelligence that makes opportunity discovery and qualification easier to understand.</p><a class="future-link" href="#join" data-app="OptiGovAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Productivity & Business</div><h3>OptiFlowAI</h3><p>Turn repetitive manual processes into clearer, optimized digital workflows.</p><a class="future-link" href="#join" data-app="OptiFlowAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Family & Legacy</div><h3>OptiLegacyAI</h3><p>Capture life stories, family memories, wisdom and messages so what matters is preserved.</p><a class="future-link" href="#join" data-app="OptiLegacyAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Professional Growth</div><h3>OptiConnectAI</h3><p>A relationship-memory assistant that helps you remember who you met and when a follow-up matters.</p><a class="future-link" href="#join" data-app="OptiConnectAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Money & Lifestyle</div><h3>OptiSaveAI</h3><p>A smarter shopping companion focused on comparing choices and reducing unnecessary overspending.</p><a class="future-link" href="#join" data-app="OptiSaveAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Wellness & Lifestyle</div><h3>OptiSeniorAI</h3><p>A thoughtful AI companion for adults 60+ focused on goals, appointments, memories and easier technology.</p><a class="future-link" href="#join" data-app="OptiSeniorAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Work & Income</div><h3>OptiGigAI</h3><p>A side-hustle opportunity matcher designed around your skills, available time and priorities.</p><a class="future-link" href="#join" data-app="OptiGigAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><div class="map-art"><div class="route"></div><div class="map-dot"></div><div class="map-dot end"></div></div><div class="future-body"><div class="future-type">Productivity & Lifestyle</div><h3>OptiRouteAI</h3><p>AI-powered route and schedule optimization focused on the right place, right time and smarter path.</p><a class="future-link" href="#join" data-app="OptiRouteAI">I’m interested →</a></div></article>
+        <article class="future-card reveal"><img class="future-photo" src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=850&q=82" alt=""><div class="future-body"><div class="future-type">Entertainment & Lifestyle</div><h3>OptiStreamAI</h3><p>A personalized entertainment companion that helps you decide what to watch, read or listen to next.</p><a class="future-link" href="#join" data-app="OptiStreamAI">I’m interested →</a></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="join" class="section">
+  <div class="container">
+    <div class="cta reveal">
+      <div class="kicker">Stay in the circle</div>
+      <h2>Ready to remember more, stress less and make smarter everyday decisions?</h2>
+      <p>Join the OptiMaxProAI list for product updates, beta openings, new launches and opportunities to help shape what comes next.</p>
+      <div class="join-hint">Tell us what you're most excited about (optional) — it helps us decide what to build next.</div>
+      <div id="interestGrid" class="interest-grid">
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiMentumAI">OptiMentumAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiGovAI">OptiGovAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiFlowAI">OptiFlowAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiLegacyAI">OptiLegacyAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiConnectAI">OptiConnectAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiSaveAI">OptiSaveAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiSeniorAI">OptiSeniorAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiGigAI">OptiGigAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiRouteAI">OptiRouteAI</label>
+        <label class="interest-chip"><input type="checkbox" name="interest" value="OptiStreamAI">OptiStreamAI</label>
+      </div>
+      <form id="masterForm" class="master-wait">
+        <input type="email" placeholder="Enter your email address" required>
+        <button class="btn btn-primary" type="submit">Join the Waitlist →</button>
+      </form>
+      <div id="masterSuccess" class="success">Thanks — you’re on the list. We’ll email you as new apps and features go live.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="brand-word-wrap footer-word-wrap">
+      <div class="brand-wordmark footer-wordmark"><span class="bw-opti">Opti</span><span class="bw-max">MaxPro</span><span class="bw-ai">AI</span></div>
+      <span class="brand-word-sub footer-word-sub">Optimize Everything. Maximize Life.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#live">Live Apps</a>
+      <a href="#circle">OptiCircleAI</a>
+      <a href="#vision">The Bigger Vision</a>
+      <a href="#join">Waitlist</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+const appShowcase = [
+  {name:"OptiEatsAI",category:"Dining & Lifestyle",copy:"Remember what you loved, what you didn’t, and recommendations shared by friends—so the next meal is easier to choose.",photo:"https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiAssetsAI",category:"Home & Asset Intelligence",copy:"Keep maintenance, receipts, records and warranties connected to the things you own instead of scattered across your life.",photo:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiMentumAI",category:"Personal Growth",copy:"Turn goals into daily action, keep momentum visible and make progress easier to remember and celebrate.",photo:"https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiGovAI",category:"Business & Opportunity",copy:"Make government-contracting opportunities easier to discover, understand and qualify before deciding what deserves your time.",photo:"https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiFlowAI",category:"Productivity & Business",copy:"Turn repetitive manual work into clearer workflows so teams spend less time managing friction and more time moving forward.",photo:"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiLegacyAI",category:"Family & Legacy",copy:"Preserve stories, memories, wisdom and messages so the things your family values do not disappear with time.",photo:"https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiConnectAI",category:"Professional Growth",copy:"Remember who you met, what mattered in the conversation and when a thoughtful follow-up could strengthen the relationship.",photo:"https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiSaveAI",category:"Money & Lifestyle",copy:"Compare choices, remember what you buy and reduce avoidable overspending when everyday purchase decisions add up.",photo:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiSeniorAI",category:"Wellness & Lifestyle",copy:"A thoughtful companion for adults 60+ that keeps goals, appointments and memories useful without making technology feel complicated.",photo:"https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiGigAI",category:"Work & Income",copy:"Match available time and skills with income opportunities so useful work is easier to find when you need it.",photo:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1100&q=86"},
+  {name:"OptiRouteAI",category:"Productivity & Lifestyle",copy:"Turn a busy day into a smarter route—right place, right time, better path, less unnecessary driving.",visual:"route"},
+  {name:"OptiStreamAI",category:"Entertainment & Lifestyle",copy:"Remember what you enjoy and make the next choice easier across streaming, books, podcasts, music and more.",visual:"stream"}
+];
+let showcaseIndex = 0;
+const showcasePhoto = document.getElementById("showcasePhoto");
+const showcaseCategory = document.getElementById("showcaseCategory");
+const showcaseName = document.getElementById("showcaseName");
+const showcaseCopy = document.getElementById("showcaseCopy");
+const showcaseDots = document.getElementById("showcaseDots");
+
+appShowcase.forEach((_,i)=>{
+  const d=document.createElement("span");
+  d.className="showcase-dot"+(i===0?" active":"");
+  d.addEventListener("click",()=>{showcaseIndex=i;renderShowcase()});
+  showcaseDots.appendChild(d);
+});
+function renderShowcase(){
+  const app=appShowcase[showcaseIndex];
+  showcasePhoto.style.opacity=0;
+  showcasePhoto.style.transform="scale(1.02)";
+  setTimeout(()=>{
+    showcasePhoto.innerHTML="";
+    showcasePhoto.style.backgroundImage="none";
+
+    if(app.visual==="stream"){
+      showcasePhoto.innerHTML=`
+        <div class="stream-collage">
+          <div class="stream-tile stream-tv"></div>
+          <div class="stream-tile stream-book"></div>
+          <div class="stream-tile stream-podcast"></div>
+          <div class="stream-tile stream-headphones"></div>
+        </div>`;
+    } else if(app.visual==="route"){
+      showcasePhoto.innerHTML=`
+        <div class="route-showcase">
+          <div class="route-road rr1"></div>
+          <div class="route-road rr2"></div>
+          <div class="route-road rr3"></div>
+          <div class="stop st1">1</div>
+          <div class="stop st2">2</div>
+          <div class="stop st3">3</div>
+          <div class="stop st4">4</div>
+          <div class="route-label">4 stops • optimized order</div>
+        </div>`;
+    } else {
+      showcasePhoto.style.backgroundImage=`url("${app.photo}")`;
+    }
+
+    showcaseCategory.textContent=app.category;
+    showcaseName.textContent=app.name;
+    showcaseCopy.textContent=app.copy;
+    [...showcaseDots.children].forEach((d,i)=>d.classList.toggle("active",i===showcaseIndex));
+    showcasePhoto.style.opacity=1;
+    showcasePhoto.style.transform="scale(1)";
+  },180);
+}
+document.getElementById("showPrev").addEventListener("click",()=>{showcaseIndex=(showcaseIndex-1+appShowcase.length)%appShowcase.length;renderShowcase()});
+document.getElementById("showNext").addEventListener("click",()=>{showcaseIndex=(showcaseIndex+1)%appShowcase.length;renderShowcase()});
+renderShowcase();
+let showcaseTimer=setInterval(()=>{showcaseIndex=(showcaseIndex+1)%appShowcase.length;renderShowcase()},3800);
+document.querySelector(".app-showcase").addEventListener("mouseenter",()=>clearInterval(showcaseTimer));
+document.querySelector(".app-showcase").addEventListener("mouseleave",()=>{showcaseTimer=setInterval(()=>{showcaseIndex=(showcaseIndex+1)%appShowcase.length;renderShowcase()},3800)});
+
+const painPoints = [
+  ["🍝","Can’t remember where you ate that amazing pasta?"],
+  ["🛠️","Forgot when your warranty expires?"],
+  ["👥","Who recommended that restaurant you wanted to try?"],
+  ["🧾","Where did you save that receipt?"],
+  ["🚗","When was your last oil change?"],
+  ["⭐","Which places did you love—and which meals should you never order again?"]
+];
+let painIndex = 0;
+
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add("visible");revealObserver.unobserve(e.target)}
+  });
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+
+document.querySelectorAll(".future-link").forEach(link=>{
+  link.addEventListener("click",()=>{
+    const app=link.dataset.app;
+    const box=document.querySelector(`#interestGrid input[value="${app}"]`);
+    if(box){
+      box.checked=true;
+      link.classList.add("added");
+      link.textContent="Added to your waitlist picks ✓";
+    }
+  });
+});
+document.getElementById("masterForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("masterSuccess").style.display="block";
+  e.currentTarget.reset();
+  document.querySelectorAll("#interestGrid input").forEach(cb=>cb.checked=false);
+  document.querySelectorAll(".future-link.added").forEach(l=>{l.classList.remove("added");l.textContent="I\u2019m interested \u2192";});
+});
+</script>
+</body>
+</html>
