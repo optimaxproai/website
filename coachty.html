@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HelperVoice | Client Prototype Review</title>
+  <style>
+    :root{
+      --amber:#FFB85C;
+      --coral:#FF6F61;
+      --cream:#FFF7ED;
+      --plum:#4A2E4C;
+      --ink:#2F2431;
+      --soft:#F8EBDD;
+      --white:#FFFFFF;
+      --muted:#756A77;
+      --line:#E9D9D0;
+      --success:#496B57;
+      --warning:#8D5C29;
+      --danger:#8C3E46;
+      --shadow:0 18px 50px rgba(74,46,76,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-rounded, "SF Pro Rounded", "Segoe UI", Arial, sans-serif;
+      color:var(--ink);
+      background:var(--cream);
+      line-height:1.55;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1180px,92vw);margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(14px);
+      background:rgba(255,247,237,.92);
+      border-bottom:1px solid rgba(74,46,76,.08);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--plum)}
+    .logo{
+      width:42px;height:42px;border-radius:50%;
+      background:linear-gradient(135deg,var(--coral),var(--amber));
+      display:grid;place-items:center;color:white;font-weight:900;
+      box-shadow:0 8px 18px rgba(255,111,97,.25);
+    }
+    .navlinks{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+    .navlinks a:hover{color:var(--plum)}
+
+    .hero{
+      padding:80px 0 64px;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(255,184,92,.28), transparent 28%),
+        radial-gradient(circle at 12% 12%, rgba(255,111,97,.14), transparent 26%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 13px;border-radius:999px;
+      background:white;border:1px solid var(--line);
+      color:var(--plum);font-size:13px;font-weight:700;
+    }
+    h1{font-size:clamp(44px,6vw,74px);line-height:1.02;margin:20px 0 20px;color:var(--plum);letter-spacing:-2px}
+    .hero p{font-size:19px;color:#5f5161;max-width:690px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;padding:0 20px;border-radius:14px;font-weight:800;
+      border:1px solid transparent;
+    }
+    .btn.primary{background:var(--coral);color:white;box-shadow:0 10px 24px rgba(255,111,97,.25)}
+    .btn.secondary{background:white;border-color:var(--line);color:var(--plum)}
+    .fineprint{font-size:12px;color:var(--muted);margin-top:14px}
+
+    .phone{
+      background:linear-gradient(180deg,#3f2843,#5b365d);
+      border-radius:36px;padding:13px;
+      box-shadow:0 28px 70px rgba(74,46,76,.28);
+      max-width:430px;margin-left:auto;
+    }
+    .screen{
+      min-height:650px;background:#fffaf3;border-radius:28px;padding:24px;
+      position:relative;overflow:hidden;
+    }
+    .status{display:flex;justify-content:space-between;font-size:12px;color:#786a78;margin-bottom:22px}
+    .avatar-row{display:flex;align-items:center;gap:12px}
+    .avatar{
+      width:50px;height:50px;border-radius:50%;border:3px solid var(--coral);
+      background:linear-gradient(145deg,#6d4b56,#2f2431);
+      display:grid;place-items:center;color:white;font-weight:800;
+    }
+    .small{font-size:12px;color:var(--muted)}
+    .screen h3{font-size:28px;color:var(--plum);margin:22px 0 8px}
+    .screen .prompt{font-size:15px;color:#5f5161}
+    .reflection-card{
+      margin-top:26px;background:white;border:1px solid #f0dfd8;border-radius:20px;padding:18px;
+      box-shadow:0 8px 24px rgba(74,46,76,.07);
+    }
+    .voice{
+      display:flex;align-items:center;gap:13px;background:#fff0e8;border-radius:16px;padding:13px;margin-top:16px;
+    }
+    .play{width:40px;height:40px;border-radius:50%;background:var(--coral);color:white;display:grid;place-items:center;font-weight:900}
+    .wave{height:26px;display:flex;align-items:center;gap:3px;flex:1}
+    .wave span{width:3px;background:var(--coral);border-radius:4px}
+    .wave span:nth-child(1){height:8px}.wave span:nth-child(2){height:17px}.wave span:nth-child(3){height:22px}.wave span:nth-child(4){height:13px}.wave span:nth-child(5){height:19px}.wave span:nth-child(6){height:10px}.wave span:nth-child(7){height:24px}.wave span:nth-child(8){height:15px}
+    .chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+    .chip{padding:8px 11px;border-radius:999px;background:var(--coral);color:white;font-size:12px;font-weight:700}
+    .inputmock{height:105px;border:1px solid #ead7cf;background:#fff;border-radius:16px;padding:15px;color:#9a8d98;margin-top:14px}
+    .progress{margin-top:24px;height:7px;border-radius:99px;background:#f0ddd4;overflow:hidden}
+    .progress span{display:block;width:48%;height:100%;background:linear-gradient(90deg,var(--coral),var(--amber))}
+
+    section{padding:74px 0}
+    .section-title{max-width:760px;margin-bottom:34px}
+    .section-title span{font-size:13px;font-weight:800;color:var(--coral);text-transform:uppercase;letter-spacing:1.3px}
+    h2{font-size:clamp(32px,4vw,48px);line-height:1.1;color:var(--plum);margin:10px 0}
+    .section-title p{color:var(--muted);font-size:17px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{
+      background:white;border:1px solid var(--line);border-radius:22px;padding:24px;
+      box-shadow:0 10px 30px rgba(74,46,76,.06);
+    }
+    .card h3{margin:8px 0;color:var(--plum)}
+    .icon{width:44px;height:44px;border-radius:13px;background:#fff1e9;display:grid;place-items:center;font-size:20px}
+    .card p,.card li{color:#6d626e;font-size:14px}
+    .card ul{padding-left:19px}
+
+    .flow{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px
+    }
+    .flow .step{
+      background:white;border:1px solid var(--line);padding:17px;border-radius:17px;text-align:center;font-size:13px;font-weight:700;color:var(--plum)
+    }
+
+    .review{background:#fffdfa;border-top:1px solid var(--line)}
+    .review-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .panel{
+      background:white;border:1px solid var(--line);border-radius:22px;padding:25px;
+      box-shadow:0 8px 26px rgba(74,46,76,.05);
+    }
+    .panel h3{margin-top:0;color:var(--plum)}
+    .panel h4{margin-bottom:8px;color:var(--coral)}
+    .panel ul{padding-left:20px}
+    .panel li{margin-bottom:8px;color:#665a67}
+    .risk-high{border-left:5px solid var(--danger)}
+    .risk-medium{border-left:5px solid var(--warning)}
+    .feature{border-left:5px solid var(--success)}
+
+    .form{margin-top:26px;background:var(--plum);border-radius:26px;padding:30px;color:white}
+    .form h3{font-size:30px;margin-top:0}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    label{font-size:13px;font-weight:700;display:block;margin-bottom:7px}
+    input,textarea{
+      width:100%;border:0;border-radius:12px;padding:13px 14px;font:inherit;
+      background:#fff;color:#2f2431;outline:none;
+    }
+    textarea{min-height:120px;resize:vertical}
+    .full{grid-column:1 / -1}
+    .status-options{display:flex;gap:20px;flex-wrap:wrap;margin-top:8px}
+    .check{display:flex;align-items:center;gap:8px;font-weight:700}
+    .check input{width:auto}
+    .signature{
+      margin-top:18px;border-top:1px solid rgba(255,255,255,.18);padding-top:18px;
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;
+    }
+    .prototype-note{
+      margin-top:18px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.09);font-size:12px;color:#f3eaf1
+    }
+    footer{padding:30px 0 50px;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width: 900px){
+      .hero-grid,.review-grid,.form-grid{grid-template-columns:1fr}
+      .phone{margin:20px auto 0}
+      .cards{grid-template-columns:1fr}
+      .flow{grid-template-columns:1fr 1fr}
+      .navlinks{display:none}
+      .full{grid-column:auto}
+      .signature{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">HV</div>
+      <div>HelperVoice</div>
+    </div>
+    <nav class="navlinks">
+      <a href="#experience">Experience</a>
+      <a href="#features">Features</a>
+      <a href="#review">Project Review</a>
+      <a href="#approval">Client Approval</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Human support, thoughtfully extended through technology</div>
+        <h1>A calmer way to understand what is happening inside.</h1>
+        <p>
+          HelperVoice is a guided emotional-reflection experience designed to help people slow down,
+          identify triggers, recognize thought patterns, name emotions, and reflect with supportive
+          guidance from their helper or the HelperVoice coaching experience.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#experience">Explore the Experience</a>
+          <a class="btn secondary" href="#review">Review Project Scope</a>
+        </div>
+        <div class="fineprint">Prototype concept only. Buttons, forms, recordings, analytics, and AI features are intentionally nonfunctional.</div>
+      </div>
+
+      <div class="phone" aria-label="HelperVoice mobile app visual mockup">
+        <div class="screen">
+          <div class="status"><span>9:41</span><span>HelperVoice</span><span>●●●</span></div>
+          <div class="avatar-row">
+            <div class="avatar">Ty</div>
+            <div>
+              <strong>Coach Ty</strong>
+              <div class="small">Reflection guide</div>
+            </div>
+          </div>
+          <h3>What went through your mind?</h3>
+          <div class="prompt">Write it exactly as it came to you. There is nothing to get “right” here.</div>
+
+          <div class="reflection-card">
+            <strong>Your thought</strong>
+            <div class="inputmock">“If I mess this up, everything is going to fall apart.”</div>
+
+            <div class="chiprow">
+              <div class="chip">Possible Catastrophizing</div>
+              <div class="chip">What-If Thinking</div>
+            </div>
+
+            <div class="voice">
+              <div class="play">▶</div>
+              <div style="min-width:90px">
+                <strong style="font-size:13px">Voice from your helper</strong>
+                <div class="small">Optional support</div>
+              </div>
+              <div class="wave">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="reflection-card">
+            <strong>Try a more balanced thought</strong>
+            <p class="small">“This is important, but one difficult moment does not determine everything that happens next.”</p>
+          </div>
+
+          <div class="progress"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-title">
+        <span>Client Experience</span>
+        <h2>Designed to feel supportive, not clinical or overwhelming.</h2>
+        <p>The experience emphasizes reflection, consent, calm pacing, and human connection while avoiding judgment-heavy language.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">◎</div>
+          <h3>Guided Reflection</h3>
+          <p>A step-by-step journey through trigger, body sensations, thoughts, emotions, behavior, and next-step reflection.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎙</div>
+          <h3>Helper Voice</h3>
+          <p>Clients may hear short, personalized recordings from an approved helper or use the default HelperVoice guidance.</p>
+        </div>
+        <div class="card">
+          <div class="icon">✦</div>
+          <h3>Thought Pattern Insights</h3>
+          <p>AI can suggest possible thinking patterns using supportive, non-diagnostic language and user-controlled exploration.</p>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="step">Trigger</div>
+        <div class="step">Body</div>
+        <div class="step">Thought</div>
+        <div class="step">Emotion</div>
+        <div class="step">Behavior</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="background:#fff3e9">
+    <div class="container">
+      <div class="section-title">
+        <span>Prototype Feature Set</span>
+        <h2>Potential capabilities for phased development.</h2>
+        <p>These concepts are shown for planning and prioritization. Inclusion in a future product should be confirmed during technical, legal, and clinical review.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Client Features</h3>
+          <ul>
+            <li>Daily guided reflections</li>
+            <li>Optional voice notes</li>
+            <li>Thought-pattern suggestions</li>
+            <li>Weekly personal insights</li>
+            <li>Helper invitation and consent</li>
+            <li>Audio transcript and replay</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Helper Features</h3>
+          <ul>
+            <li>Client invitation workflow</li>
+            <li>Record or upload voice guidance</li>
+            <li>Assign guidance to reflection stages</li>
+            <li>Preview messages before publishing</li>
+            <li>Manage client relationships</li>
+            <li>Future: client-approved progress insights</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Platform Features</h3>
+          <ul>
+            <li>Role-based accounts</li>
+            <li>Consent and permission controls</li>
+            <li>Secure authentication</li>
+            <li>Audit history</li>
+            <li>Content safety screening</li>
+            <li>Administrative policy controls</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="review" class="review">
+    <div class="container">
+      <div class="section-title">
+        <span>Project Documentation</span>
+        <h2>Goals, actions, requirements, and areas requiring careful review.</h2>
+        <p>This section is intended to help the client, designer, developer, and professional advisors align before production begins.</p>
+      </div>
+
+      <div class="review-grid">
+        <div class="panel">
+          <h3>1. Product Goals</h3>
+          <ul>
+            <li>Create a warm digital space for structured emotional reflection.</li>
+            <li>Extend a trusted helper's support without pretending the helper is available in real time.</li>
+            <li>Help clients recognize recurring patterns in thoughts, emotions, triggers, and behavior.</li>
+            <li>Make AI insights optional, transparent, and non-diagnostic.</li>
+            <li>Give clients control over who may access or contribute to their experience.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>2. Recommended Actions Before Build</h3>
+          <ul>
+            <li>Confirm target users and helper roles.</li>
+            <li>Define whether the product is wellness-focused, clinically supportive, or intended for licensed practices.</li>
+            <li>Obtain legal/privacy review before storing sensitive client information.</li>
+            <li>Create client consent, helper-access, revocation, retention, and deletion rules.</li>
+            <li>Define crisis/escalation messaging and emergency limitations.</li>
+            <li>Complete technical security architecture before production development.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>3. Core Requirements</h3>
+          <ul>
+            <li>Accessible alternative to all audio content, including transcripts.</li>
+            <li>Clear opt-in for helper connections and AI analysis.</li>
+            <li>Client ability to disconnect a helper and revoke future access.</li>
+            <li>Role-based authorization and separation of client/helper/admin privileges.</li>
+            <li>Secure handling of recordings, reflection history, identifiers, and account data.</li>
+            <li>Clear empty, error, revoked-access, and unavailable-audio states.</li>
+          </ul>
+        </div>
+
+        <div class="panel feature">
+          <h3>4. Viable Features</h3>
+          <ul>
+            <li>Guided reflection workflow.</li>
+            <li>User-generated voice notes.</li>
+            <li>Client-approved helper recordings.</li>
+            <li>Personal weekly pattern summaries.</li>
+            <li>Optional thought-pattern education.</li>
+            <li>Helper invitations and consent management.</li>
+            <li>Audio transcripts and accessibility controls.</li>
+            <li>Non-clinical journaling and reflection prompts.</li>
+          </ul>
+        </div>
+
+        <div class="panel risk-high">
+          <h3>5. High-Risk Areas</h3>
+          <ul>
+            <li>AI interpreting emotionally sensitive or crisis-related statements.</li>
+            <li>Representing AI-generated guidance as therapy or professional clinical advice.</li>
+            <li>Helpers viewing client reflections without explicit permission.</li>
+            <li>Storage or transmission of highly sensitive voice recordings and mental-health-related data.</li>
+            <li>Users believing a therapist/helper is actively monitoring them when they are not.</li>
+            <li>Automated conclusions about a user's mental state, diagnosis, risk, or intent.</li>
+            <li>Inadequate procedures for emergencies, abuse disclosures, self-harm, or harm-to-others content.</li>
+          </ul>
+        </div>
+
+        <div class="panel risk-medium">
+          <h3>6. HIPAA / Privacy / Compliance Questions</h3>
+          <ul>
+            <li>Will HelperVoice be offered directly to consumers, through licensed clinicians, or through covered healthcare organizations?</li>
+            <li>Will the platform create, receive, maintain, or transmit protected health information on behalf of a HIPAA-covered entity?</li>
+            <li>Will vendors handling authentication, storage, analytics, AI, email, voice, or hosting sign appropriate Business Associate Agreements when required?</li>
+            <li>What data is retained, for how long, and who can delete/export it?</li>
+            <li>Are audio files, transcripts, logs, backups, and analytics treated as sensitive data?</li>
+            <li>What breach response, access logging, encryption, least-privilege, and administrative safeguards will be required?</li>
+            <li>What state privacy, consumer-health-data, or professional licensing rules apply in the launch markets?</li>
+          </ul>
+          <p style="font-size:12px;color:#7d6c76"><strong>Important:</strong> This prototype does not determine HIPAA applicability or compliance. Formal legal, privacy, security, and clinical review should occur before launch.</p>
+        </div>
+
+        <div class="panel">
+          <h3>7. AI Safety Requirements</h3>
+          <ul>
+            <li>Use language such as “may reflect” or “you may want to explore” rather than declaring a diagnosis or fact.</li>
+            <li>Give users the ability to dismiss or disagree with suggested patterns.</li>
+            <li>Avoid language implying surveillance, certainty, or clinical authority.</li>
+            <li>Separate educational insights from licensed professional advice.</li>
+            <li>Design defined responses for high-risk or emergency content.</li>
+            <li>Document model limitations and fallback behavior when confidence is low.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>8. Decisions Still Needed</h3>
+          <ul>
+            <li>Who can qualify as a “helper”?</li>
+            <li>Can one client connect to multiple helpers?</li>
+            <li>Can helpers see full reflections, summaries only, or no reflection content?</li>
+            <li>Should helper audio require one-time relationship consent or individual-message approval?</li>
+            <li>Will Coach Ty be a default guide, optional persona, or branded client-specific coach?</li>
+            <li>Which features belong in MVP versus later phases?</li>
+            <li>Who pays: client, helper, practice, employer, payer, or organization?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="approval" class="form">
+        <h3>Client Review & Project Approval</h3>
+        <p style="color:#eadce8;max-width:850px">Use this prototype as a structured discussion document. These fields are visual only and do not submit or store information.</p>
+
+        <div class="form-grid">
+          <div>
+            <label>Company / Organization Name</label>
+            <input type="text" placeholder="Enter company name" />
+          </div>
+          <div>
+            <label>Primary Contact Name</label>
+            <input type="text" placeholder="Enter contact name" />
+          </div>
+          <div>
+            <label>Phone</label>
+            <input type="tel" placeholder="(000) 000-0000" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" placeholder="name@company.com" />
+          </div>
+
+          <div class="full">
+            <label>Project Comments / Requested Changes</label>
+            <textarea placeholder="Add feedback, requested changes, missing features, concerns, or questions here..."></textarea>
+          </div>
+
+          <div class="full">
+            <label>Review Status</label>
+            <div class="status-options">
+              <label class="check"><input type="checkbox" /> Accept</label>
+              <label class="check"><input type="checkbox" /> Reject</label>
+              <label class="check"><input type="checkbox" /> Rework Needed</label>
+              <label class="check"><input type="checkbox" /> Legal / Compliance Review Needed</label>
+              <label class="check"><input type="checkbox" /> Technical Review Needed</label>
+            </div>
+          </div>
+
+          <div class="full">
+            <label>Priority Notes</label>
+            <textarea placeholder="What must be included in the next version? What should be removed, delayed, or reconsidered?"></textarea>
+          </div>
+        </div>
+
+        <div class="signature">
+          <div>
+            <label>Client / Reviewer Name</label>
+            <input type="text" placeholder="Name" />
+          </div>
+          <div>
+            <label>Review Date</label>
+            <input type="text" placeholder="MM / DD / YYYY" />
+          </div>
+        </div>
+
+        <div class="prototype-note">
+          Prototype disclaimer: This page is a visual concept and planning document only. It does not provide healthcare, legal, privacy, security, or regulatory advice. No form fields, AI features, recordings, client records, analytics, or approval actions are active.
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">HelperVoice Client Prototype • Concept UI/UX & Project Review</div>
+</footer>
+
+</body>
+</html>
