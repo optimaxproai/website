@@ -130,6 +130,15 @@ h2{font-size:clamp(2rem,4vw,3.3rem);line-height:1.05;letter-spacing:-.045em;marg
 .cta p{color:var(--muted);max-width:650px;margin:0 auto 28px}
 footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:.82rem}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.contact-form{max-width:760px;margin:34px auto 0;text-align:left;display:grid;gap:18px;padding:30px;background:var(--panel);border:1px solid var(--line);border-radius:22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:grid;gap:7px}
+.form-group.full{grid-column:1 / -1}
+.form-group label{font-size:.84rem;font-weight:800;color:var(--text)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 15px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0b101b;color:var(--text);font:inherit;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,230,118,.08)}
+.form-group textarea{min-height:120px;resize:vertical}
+.form-note{margin:0;color:var(--muted);font-size:.8rem;text-align:center}
 @media(max-width:900px){
   .hero-grid,.split,.ai-grid{grid-template-columns:1fr}
   .services{grid-template-columns:1fr 1fr}
@@ -147,7 +156,10 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-s
   .hero-card,.ai{padding:25px}
   .mini-grid{grid-template-columns:1fr 1fr}
   .btn{width:100%}
+  .form-grid{grid-template-columns:1fr}
+  .contact-form{padding:22px}
 }
+
 </style>
 </head>
 <body>
@@ -241,10 +253,10 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-s
       </div>
     </div>
     <div class="timeline">
-      <div class="role"><h3>Senior Director of Operations — CE Tours</h3><div class="meta">OPERATIONS • STRATEGY • TEAM LEADERSHIP</div><p>Directed operational strategy, built and led the operations team, established KPIs, managed partners, mitigated risk, and used data to drive continuous improvement.</p></div>
-      <div class="role"><h3>Program Development & Management — Rustic Pathways</h3><div class="meta">PROGRAMS • PARTNERSHIPS • FINANCIAL OVERSIGHT</div><p>Developed programs, sourced and negotiated with partners, managed budgets and quotes, and supported leadership reporting and program execution.</p></div>
-      <div class="role"><h3>Director of Events — Designer Destinations & Events</h3><div class="meta">EVENTS • BUSINESS DEVELOPMENT • EXECUTION</div><p>Led full life-cycle event management and brought together planning, logistics, vendors, clients, and execution.</p></div>
-      <div class="role"><h3>CFO & Business Manager — Jetstream Trucking</h3><div class="meta">BUSINESS • LOGISTICS • SALES</div><p>Combined financial, operational, logistics, and business development responsibilities in a small-business environment.</p></div>
+      <div class="role"><h3>Senior Director of Operations</h3><div class="meta">OPERATIONS • STRATEGY • TEAM LEADERSHIP</div><p>Directed operational strategy, built and led the operations team, established KPIs, managed partners, mitigated risk, and used data to drive continuous improvement.</p></div>
+      <div class="role"><h3>Program Development & Management</h3><div class="meta">PROGRAMS • PARTNERSHIPS • FINANCIAL OVERSIGHT</div><p>Developed programs, sourced and negotiated with partners, managed budgets and quotes, and supported leadership reporting and program execution.</p></div>
+      <div class="role"><h3>Director of Events</h3><div class="meta">EVENTS • BUSINESS DEVELOPMENT • EXECUTION</div><p>Led full life-cycle event management and brought together planning, logistics, vendors, clients, and execution.</p></div>
+      <div class="role"><h3>CFO & Business Manager</h3><div class="meta">BUSINESS • LOGISTICS • SALES</div><p>Combined financial, operational, logistics, and business development responsibilities in a small-business environment.</p></div>
       <div class="role"><h3>Xerox Corporation</h3><div class="meta">ANALYTICS • PROJECTS • COMMUNICATIONS • TECHNOLOGY</div><p>Experience spanning sales analytics, fleet operations project management, events, communications, web content, launch planning, and software testing.</p></div>
     </div>
   </div>
@@ -276,10 +288,51 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-s
 
 <section id="contact" class="cta">
   <div class="container">
-    <div class="kicker">Let's Build Better</div>
+    <div class="kicker">Let's Talk</div>
     <h2>Where is your business <span class="gradient">losing time, money, or momentum?</span></h2>
-    <p>If you have a process that feels harder than it should, a team that is overwhelmed by manual work, or an idea for using AI but don't know where to start, that's where I can help.</p>
-    <a class="btn btn-primary" href="https://optimaxproai.com" target="_blank" rel="noopener">Start a Conversation</a>
+    <p>If you have a process that feels harder than it should, a team that is overwhelmed by manual work, or an idea for using AI but don't know where to start, tell me a little about what you need.</p>
+
+    <form class="contact-form" action="https://formsubmit.co/info@OptiMaxProAI.com" method="POST">
+      <input type="hidden" name="_cc" value="optimaxproai@gmail.com">
+      <input type="hidden" name="_subject" value="New DM Boyd Website Inquiry">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group full">
+          <label for="website">Website <span style="color:var(--muted);font-weight:500">(if you have one)</span></label>
+          <input id="website" name="website" type="url" placeholder="https://yourwebsite.com">
+        </div>
+        <div class="form-group full">
+          <label for="contact-method">Preferred Method of Contact</label>
+          <select id="contact-method" name="preferred_contact_method" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Email">Email</option>
+            <option value="Phone">Phone</option>
+            <option value="Text">Text</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="phone">Phone Number <span style="color:var(--muted);font-weight:500">(if phone or text is preferred)</span></label>
+          <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555">
+        </div>
+        <div class="form-group full">
+          <label for="message">What would you like help with?</label>
+          <textarea id="message" name="message" placeholder="Tell me briefly about your business, challenge, or idea."></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Let's Talk</button>
+      <p class="form-note">Your information will be sent to OptiMaxProAI so we can follow up using your preferred contact method.</p>
+    </form>
   </div>
 </section>
 </main>
