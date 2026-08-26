@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistah-Friends | Life is Better with Your Sistahs</title>
+<meta name="description" content="Sistah-Friends is a vibrant community for women 50+ centered on friendship, fun, travel, circles, giving back and shared experiences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#250044;--purple:#41006e;--violet:#73009d;--pink:#e2137b;--magenta:#bc0f99;
+  --coral:#ff5a50;--orange:#ff8b28;--gold:#ffc52f;--cream:#fff8f4;--white:#ffffff;--ink:#2d1933;--muted:#6f6074;
+  --shadow:0 16px 42px rgba(59,0,80,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f7f7f8;color:var(--ink);font-family:"DM Sans",sans-serif;line-height:1.55}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.page{width:min(1240px,100%);margin:0 auto;background:#fff;box-shadow:0 12px 50px rgba(38,0,62,.12)}
+.wrap{width:min(1120px,92%);margin:auto}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+.section-title{font-family:"Playfair Display",serif;font-size:clamp(2.2rem,4vw,3.8rem);line-height:1.05;margin:.3rem 0 1rem}
+.lead{font-size:1.08rem;color:#5d4b61;max-width:760px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;font-weight:800;padding:.82rem 1.22rem;border:0;cursor:pointer}
+.btn-outline{border:1px solid rgba(255,255,255,.75);color:#fff;background:transparent}
+.btn-hot{color:#fff;background:linear-gradient(90deg,var(--pink),var(--coral),var(--gold));box-shadow:0 9px 24px rgba(231,20,123,.28)}
+.btn-light{background:#fff;color:var(--purple);border:1px solid #eadbe9}
+.chip{display:inline-block;padding:.35rem .6rem;border-radius:999px;background:#ffe6f0;color:var(--pink);font-size:.7rem;font-weight:800}
+
+/* HEADER */
+.topbar{height:84px;background:linear-gradient(90deg,#250044 0%,#44006e 45%,#6e0792 100%);color:white;display:flex;align-items:center;position:sticky;top:0;z-index:60}
+.nav{width:min(1120px,92%);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-heart{width:48px;height:48px}
+.logo-heart svg{width:100%;height:100%}
+.logo-text .name{font-family:"Pacifico",cursive;font-size:2rem;line-height:.95;background:linear-gradient(90deg,#fff,#ffd35d,#ff63a3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo-text .tag{margin-top:4px;font-size:.51rem;letter-spacing:.13em;text-transform:uppercase;color:#f8dcea;font-weight:700}
+.links{display:flex;align-items:center;gap:18px;color:#fff;font-size:.82rem;font-weight:600}
+.links a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{position:relative;height:650px;overflow:hidden;background:var(--deep)}
+.hero img{position:absolute;inset:0;object-position:center 35%}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,0,42,.04) 0%,rgba(25,0,42,.05) 42%,rgba(44,0,70,.75) 72%,rgba(35,0,61,.96) 100%)}
+.hero-copy{position:absolute;z-index:3;left:50%;bottom:120px;transform:translateX(-50%);text-align:center;width:min(820px,90%);color:#fff}
+.hero h1{font-family:"Playfair Display",serif;margin:0;font-size:clamp(3rem,6vw,5.7rem);line-height:.96}
+.hero h1 .script{display:block;font-family:"Pacifico",cursive;font-weight:400;color:var(--gold);font-size:.78em}
+.hero-meta{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:18px;font-size:1rem;color:#fff5fa}
+.hero-meta span:not(:last-child):after{content:"•";color:var(--pink);margin-left:16px}
+.hero-sub{margin:6px auto 14px;font-size:1.08rem;color:#f8edf8;max-width:720px}
+.hero-host{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#f7d4e5;margin-bottom:16px}
+.hero-wave{position:absolute;z-index:4;left:-4%;right:-4%;bottom:-1px;height:95px}
+.w1,.w2,.w3{position:absolute;left:0;right:0;height:80px;border-radius:50% 50% 0 0/100% 100% 0 0}
+.w1{bottom:-32px;background:linear-gradient(90deg,var(--orange),var(--pink));transform:rotate(-1.2deg)}
+.w2{bottom:-47px;background:linear-gradient(90deg,var(--pink),var(--magenta),var(--purple));transform:rotate(1deg)}
+.w3{bottom:-63px;background:var(--cream);transform:rotate(-.7deg)}
+
+/* ABOUT */
+.about{padding:62px 0 56px;background:var(--cream)}
+.about-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:44px;align-items:center}
+.about h2{margin:0;color:var(--deep);font-family:"Playfair Display",serif;font-size:2.7rem;line-height:1}
+.about h2 .script{display:block;font-family:"Pacifico",cursive;font-weight:400;font-size:1.35em;color:var(--pink);margin-top:.18rem}
+.about p{color:#5d4b61}
+.icon-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.icon-item{text-align:center;padding:10px 8px}
+.icon-circle{width:78px;height:78px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;color:#fff;font-size:1.9rem;background:linear-gradient(145deg,var(--violet),var(--pink),var(--orange))}
+.icon-item b{display:block;color:var(--deep)}
+.icon-item p{font-size:.8rem;color:#68586d}
+
+/* WHY */
+.why{padding:42px 0 34px;background:linear-gradient(115deg,#2d045a,#5f0587 43%,#9f0f99 70%,#db257a 100%);color:white}
+.why h2{font-family:"Playfair Display",serif;text-align:center;margin:0;font-size:2.8rem}
+.why h2 .script{font-family:"Pacifico",cursive;font-weight:400;color:#ffd65c}
+.why .sub{text-align:center;color:#f5e6f6;margin:8px 0 28px}
+.why-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.why-card{min-height:190px;padding:18px 14px;border:1px solid rgba(255,255,255,.26);border-radius:12px;text-align:center;background:rgba(32,0,56,.12)}
+.why-card .ico{font-size:2rem;color:var(--gold);margin-bottom:9px}
+.why-card b{display:block}
+.why-card p{font-size:.77rem;color:#f6eaf6}
+
+/* PHOTO STRIP */
+.photo-strip{display:grid;grid-template-columns:repeat(4,1fr)}
+.photo-strip figure{margin:0;height:185px;overflow:hidden}
+
+/* CONTENT SECTIONS */
+.content-section{padding:72px 0;background:#fff}
+.content-section.alt{background:linear-gradient(180deg,#fff7f3,#fbf1ff)}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.event-card,.idea-card,.circle-card,.impact-card{
+  background:#fff;border:1px solid #ecdfea;border-radius:22px;overflow:hidden;box-shadow:var(--shadow)
+}
+.event-card .photo{height:210px}
+.card-body{padding:20px}
+.card-body h3{margin:.45rem 0 .5rem;color:var(--deep)}
+.card-body p{color:var(--muted);font-size:.92rem}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.meta span{font-size:.72rem;padding:.35rem .55rem;border-radius:999px;background:#f5edf8;color:#654269;font-weight:700}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.card-actions a,.card-actions button{font:inherit;font-size:.8rem}
+.idea-card,.circle-card,.impact-card{padding:22px}
+.idea-card .icon,.circle-card .icon,.impact-card .icon{font-size:1.8rem;margin-bottom:10px}
+.idea-card h3,.circle-card h3,.impact-card h3{margin:.1rem 0 .6rem}
+.idea-card p,.circle-card p,.impact-card p{color:var(--muted);font-size:.92rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{background:#fff;border:1px solid #ecdfea;border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.panel h3{color:var(--deep)}
+.list{display:grid;gap:12px;margin-top:14px}
+.list div{padding:13px 14px;border-radius:14px;background:#faf5fb;border:1px solid #efe4f0}
+.form{display:grid;gap:12px}
+.form input,.form textarea,.form select{width:100%;padding:.9rem 1rem;border-radius:14px;border:1px solid #dacddb;font:inherit}
+.form textarea{min-height:120px;resize:vertical}
+.form small{color:#77677b}
+.notice{padding:14px 16px;border-radius:14px;background:#fff4da;color:#644c15;font-size:.86rem}
+
+/* TESTIMONIAL */
+.testimonial{background:#fff7f4;padding:28px 0 24px}
+.testimonial-inner{display:grid;grid-template-columns:110px 1fr 90px;gap:22px;align-items:center;max-width:920px;margin:auto}
+.avatar{width:94px;height:94px;border-radius:50%;overflow:hidden;border:4px solid var(--gold)}
+.quote{color:#4e3554;font-size:1rem}
+.quote:before{content:"“";color:var(--pink);font-family:"Playfair Display",serif;font-size:3.2rem;line-height:0;vertical-align:-.45em;margin-right:8px}
+.quote strong{color:var(--pink)}
+.dots{display:flex;gap:7px;justify-content:center}
+.dots span{width:8px;height:8px;border-radius:50%;border:1px solid var(--pink)}
+.dots span:first-child{background:var(--pink)}
+
+/* CTA / FOOTER */
+.cta{position:relative;padding:48px 0 66px;text-align:center;color:white;background:linear-gradient(100deg,var(--purple),var(--magenta),var(--pink),var(--orange));overflow:hidden}
+.cta:before{content:"";position:absolute;left:-5%;right:-5%;bottom:-60px;height:95px;background:var(--purple);border-radius:50% 50% 0 0/100% 100% 0 0;transform:rotate(1deg)}
+.cta h2{position:relative;z-index:2;margin:0;font-family:"Pacifico",cursive;font-weight:400;font-size:clamp(2.3rem,5vw,4.4rem)}
+.cta p,.cta .btn{position:relative;z-index:2}
+footer{background:var(--deep);color:#d9c8e0;padding:28px 0}
+.footer{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:20px;align-items:center}
+.footer-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:.76rem}
+.footer-host{text-align:right;font-size:.72rem}
+.footer-host b{color:#ffd269}
+
+@media(max-width:950px){
+  .about-grid,.grid-2{grid-template-columns:1fr}
+  .icon-row{grid-template-columns:repeat(2,1fr)}
+  .why-cards{grid-template-columns:repeat(2,1fr)}
+  .photo-strip{grid-template-columns:repeat(2,1fr)}
+  .cards-3{grid-template-columns:1fr 1fr}
+  .footer{grid-template-columns:1fr;text-align:center}
+  .footer .brand{justify-self:center}.footer-host{text-align:center}
+}
+@media(max-width:720px){
+  .links a:not(.btn){display:none}
+  .topbar{height:76px}.logo-text .name{font-size:1.45rem}.logo-text .tag{display:none}.logo-heart{width:42px;height:42px}
+  .hero{height:600px}.hero h1{font-size:3.15rem}.hero-copy{bottom:110px}.hero-meta{font-size:.82rem;gap:8px}
+  .hero-meta span:not(:last-child):after{margin-left:8px}
+  .why-cards,.icon-row,.photo-strip,.cards-3{grid-template-columns:1fr}
+  .photo-strip figure{height:280px}
+  .testimonial-inner{grid-template-columns:1fr;text-align:center}.avatar{margin:auto}.dots{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="#top">
+      <div class="logo-heart" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs><linearGradient id="heartG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffc52f"/><stop offset="45%" stop-color="#e2137b"/><stop offset="100%" stop-color="#73009d"/></linearGradient></defs>
+          <path d="M50 88C26 72 13 58 13 38C13 24 23 15 36 15C45 15 50 21 50 21C50 21 55 15 64 15C77 15 87 24 87 38C87 58 74 72 50 88Z" fill="none" stroke="url(#heartG)" stroke-width="6"/>
+          <circle cx="35" cy="37" r="8" fill="#ff8b28"/><circle cx="50" cy="31" r="9" fill="#e2137b"/><circle cx="65" cy="37" r="8" fill="#73009d"/>
+        </svg>
+      </div>
+      <div class="logo-text"><div class="name">Sistah-Friends</div><div class="tag">Come as a friend, leave as a Sistah.</div></div>
+    </a>
+    <nav class="links">
+      <a href="#about">About</a><a href="#past-events">Past Events</a><a href="#future-events">Future Ideas</a><a href="#circles">Circles</a><a href="#impact">Impact</a><a href="#suggest">Suggest</a>
+      <a class="btn btn-hot" href="#join">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <img src="https://images.pexels.com/photos/6579978/pexels-photo-6579978.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Black women laughing and enjoying time together">
+  <div class="hero-copy">
+    <h1>Life is Better <span class="script">with Your Sistahs</span></h1>
+    <div class="hero-meta"><span>Friendship</span><span>Fun</span><span>Experiences</span><span>Giving Back</span></div>
+    <p class="hero-sub">The social community for women 50+ who are ready to live more, connect deeper and enjoy this chapter together.</p>
+    <div class="hero-host">A community program hosted by Designer Destinations & Events</div>
+    <a class="btn btn-hot" href="#join">Join the Sisterhood →</a>
+  </div>
+  <div class="hero-wave"><div class="w1"></div><div class="w2"></div><div class="w3"></div></div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div style="font-size:.92rem;color:#3f2750;font-weight:700">More Than a Group...</div>
+      <h2>A <span class="script">Sisterhood</span></h2>
+      <p>Sistah-Friends is a real-world community designed to bring women 50+ together to build lasting friendships, share unforgettable experiences and make a positive impact—in our lives and in our community.</p>
+      <p style="font-weight:700;color:#7c236f">Come alone. Bring a friend. Either way, there is room for you.</p>
+    </div>
+    <div class="icon-row">
+      <div class="icon-item"><div class="icon-circle">🥂</div><b>Connect</b><p>Meet amazing women who just get it—and become true Sistahs.</p></div>
+      <div class="icon-item"><div class="icon-circle">✈️</div><b>Explore</b><p>Local events, weekend getaways and bucket-list travel.</p></div>
+      <div class="icon-item"><div class="icon-circle">💝</div><b>Give Back</b><p>Support each other, Black-owned businesses and meaningful causes.</p></div>
+      <div class="icon-item"><div class="icon-circle">⭕</div><b>Belong</b><p>Find your Circles, your people and your place in the community.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <h2>Why Women <span class="script">Love</span> Sistah-Friends</h2>
+    <div class="sub">Because life is richer when we do it together.</div>
+    <div class="why-cards">
+      <div class="why-card"><div class="ico">▣</div><b>Fun Events</b><p>Brunches, dinners, tastings, festivals, live music, culture and workshops.</p></div>
+      <div class="why-card"><div class="ico">✈</div><b>Girl Trips</b><p>Travel near and far with a group of amazing Sistahs.</p></div>
+      <div class="why-card"><div class="ico">◎</div><b>Circles</b><p>Join or suggest Circles around travel, books, wellness, food, volunteering and more.</p></div>
+      <div class="why-card"><div class="ico">⌂</div><b>Recommendations</b><p>Discover and recommend restaurants, events and Black-owned businesses.</p></div>
+      <div class="why-card"><div class="ico">♡</div><b>Sponsor a Sistah</b><p>Help another woman attend and share the experience.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="photo-strip">
+  <figure><img src="https://images.pexels.com/photos/5331042/pexels-photo-5331042.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Women enjoying brunch"></figure>
+  <figure><img src="https://images.pexels.com/photos/4880998/pexels-photo-4880998.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Women traveling together"></figure>
+  <figure><img src="https://images.pexels.com/photos/6579978/pexels-photo-6579978.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Black women laughing together"></figure>
+  <figure><img src="https://images.pexels.com/photos/32114212/pexels-photo-32114212.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Black women walking together"></figure>
+</section>
+
+<section class="content-section" id="past-events">
+  <div class="wrap">
+    <div class="eyebrow">Our Story So Far</div>
+    <h2 class="section-title">Past Sistah-Friends Experiences</h2>
+    <p class="lead">The heart of Sistah-Friends is getting out into the real world together. These are the kinds of experiences the group has already been built around.</p>
+    <div class="cards-3">
+      <article class="event-card">
+        <div class="photo"><img src="https://images.pexels.com/photos/2912108/pexels-photo-2912108.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Wine glasses and gathering"></div>
+        <div class="card-body">
+          <span class="chip">PAST EVENT</span><h3>Memorial Weekend Wine Tasting</h3>
+          <p>A relaxed group outing centered on connection, conversation and enjoying a shared wine-tasting experience together.</p>
+          <div class="meta"><span>Wine + Social</span><span>Small Group</span><span>Bring a Friend</span></div>
+        </div>
+      </article>
+      <article class="event-card">
+        <div class="photo"><img src="https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Women at brunch"></div>
+        <div class="card-body">
+          <span class="chip">COMMUNITY FAVORITE</span><h3>Brunch & Conversation</h3>
+          <p>Easy, welcoming meetups where women can come alone, meet new people and have a reason to get out and connect.</p>
+          <div class="meta"><span>Brunch</span><span>Conversation</span><span>Local</span></div>
+        </div>
+      </article>
+      <article class="event-card">
+        <div class="photo"><img src="https://images.pexels.com/photos/7551751/pexels-photo-7551751.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Friends enjoying live music"></div>
+        <div class="card-body">
+          <span class="chip">COMMUNITY STYLE</span><h3>Music, Culture & Nights Out</h3>
+          <p>Concerts, festivals, theater, cultural experiences and nights out that are even better when you have Sistahs to go with.</p>
+          <div class="meta"><span>Music</span><span>Culture</span><span>Fun</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="content-section alt" id="future-events">
+  <div class="wrap">
+    <div class="eyebrow">What's Next?</div>
+    <h2 class="section-title">Future Event Ideas</h2>
+    <p class="lead">Sistah-Friends should never run out of reasons to connect. Members help shape the calendar, and the best ideas can become official experiences.</p>
+    <div class="cards-3">
+      <div class="idea-card"><div class="icon">🍷</div><h3>Black-Owned Winery Day</h3><p>A curated day trip with transportation, tasting, lunch and time to connect.</p><div class="meta"><span>Day Trip</span><span>Food + Wine</span></div></div>
+      <div class="idea-card"><div class="icon">🎭</div><h3>Dinner + Theater Night</h3><p>Dinner together followed by a play, musical, comedy show or cultural performance.</p><div class="meta"><span>Evening</span><span>Culture</span></div></div>
+      <div class="idea-card"><div class="icon">🌿</div><h3>Wellness Saturday</h3><p>Walking, yoga, spa experiences, healthy brunch and real conversation about this chapter of life.</p><div class="meta"><span>Wellness</span><span>Self-Care</span></div></div>
+      <div class="idea-card"><div class="icon">✈️</div><h3>Sistah-Friends Getaway</h3><p>A long weekend designed for women who want to travel but do not always have someone to go with.</p><div class="meta"><span>Travel</span><span>Weekend</span></div></div>
+      <div class="idea-card"><div class="icon">🍽️</div><h3>Restaurant Passport</h3><p>Explore a different Black-owned restaurant each month and build a community favorites list.</p><div class="meta"><span>Black-Owned</span><span>Dining</span></div></div>
+      <div class="idea-card"><div class="icon">🤲🏾</div><h3>Serve Together Day</h3><p>Volunteer as a group, then share a meal afterward. Connection and impact in the same day.</p><div class="meta"><span>Giving Back</span><span>Community</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" id="circles">
+  <div class="wrap">
+    <div class="eyebrow">Smaller Communities</div>
+    <h2 class="section-title">Find Your Circle</h2>
+    <p class="lead">Circles make the community feel smaller and more personal. Women can join existing Circles—or suggest one they want to help create.</p>
+    <div class="cards-3">
+      <div class="circle-card"><div class="icon">✈️</div><h3>Travel Sistahs</h3><p>For women who want travel companions, weekend escapes and shared destination ideas.</p></div>
+      <div class="circle-card"><div class="icon">📚</div><h3>Book & Culture Sistahs</h3><p>Books, films, museums, theater and the conversations that follow.</p></div>
+      <div class="circle-card"><div class="icon">🚶🏾‍♀️</div><h3>Wellness Sistahs</h3><p>Walking, healthy living, self-care and encouraging one another to stay active.</p></div>
+      <div class="circle-card"><div class="icon">🍽️</div><h3>Foodie Sistahs</h3><p>New restaurants, brunch spots, cooking experiences and hidden gems.</p></div>
+      <div class="circle-card"><div class="icon">💼</div><h3>Entrepreneur Sistahs</h3><p>Women building businesses, exchanging ideas and supporting each other's work.</p></div>
+      <div class="circle-card"><div class="icon">💜</div><h3>Suggest a Circle</h3><p>Have an idea? Members should be able to propose a new Circle and help shape it.</p><div class="card-actions"><a class="btn btn-light" href="#suggest">Suggest One</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section alt" id="impact">
+  <div class="wrap">
+    <div class="eyebrow">Sistahs Give</div>
+    <h2 class="section-title">Friendship With Purpose</h2>
+    <p class="lead">Our good time can still do good. Where we gather, where we spend and how we show up can create impact.</p>
+    <div class="cards-3">
+      <div class="impact-card"><div class="icon">🖤</div><h3>Support Black-Owned</h3><p>Intentionally include Black-owned restaurants, venues and businesses in our experiences whenever they are a good fit.</p></div>
+      <div class="impact-card"><div class="icon">💝</div><h3>Sponsor a Sistah</h3><p>Help another woman participate in an eligible event when cost might otherwise keep her home.</p></div>
+      <div class="impact-card"><div class="icon">🌱</div><h3>Cause of the Month</h3><p>Spotlight a meaningful organization or community need and give members a simple way to support it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" id="suggest">
+  <div class="wrap grid-2">
+    <div class="panel">
+      <div class="eyebrow">Your Voice Matters</div>
+      <h2 class="section-title" style="font-size:2.5rem">Suggest What We Should Do Next</h2>
+      <p class="lead">Members should help shape Sistah-Friends. Recommend an event, restaurant, trip, activity or Circle idea.</p>
+      <form class="form" action="mailto:optimaxproai@gmail.com" method="post" enctype="text/plain">
+        <input name="name" placeholder="Your name" required>
+        <input name="email" type="email" placeholder="Your email" required>
+        <select name="type">
+          <option>Event idea</option><option>Restaurant recommendation</option><option>Travel idea</option><option>Circle idea</option><option>Community cause</option>
+        </select>
+        <input name="title" placeholder="Name of your suggestion">
+        <textarea name="details" placeholder="Tell us why you think Sistah-Friends would enjoy this..."></textarea>
+        <button class="btn btn-hot" type="submit">Send My Suggestion</button>
+        <small>This prototype uses your email app. In the live version, connect this form directly to your database/email service.</small>
+      </form>
+    </div>
+    <div class="panel">
+      <div class="eyebrow">How Ideas Become Experiences</div>
+      <h3>From member suggestion to official event</h3>
+      <div class="list">
+        <div><b>1. Suggest it</b><br><span>Share an event, restaurant, activity, trip or Circle idea.</span></div>
+        <div><b>2. Community interest</b><br><span>Other members can indicate “I'd Go” or “I'm Interested.”</span></div>
+        <div><b>3. DDE reviews logistics</b><br><span>Designer Destinations & Events evaluates timing, venue, cost and feasibility.</span></div>
+        <div><b>4. It becomes official</b><br><span>The strongest ideas can become official Sistah-Friends experiences.</span></div>
+      </div>
+      <div class="notice" style="margin-top:18px">This gives Sistah-Friends a calendar shaped by the women in the community—not just by an admin deciding what everyone should do.</div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="testimonial-inner">
+    <div class="avatar"><img src="https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Smiling mature Black woman"></div>
+    <div class="quote"><em>I came because I wanted something to do. I stayed because I found women I genuinely enjoy doing life with.</em><br><strong>— The kind of Sistah-Friends story we're building toward</strong></div>
+    <div class="dots"><span></span><span></span><span></span><span></span></div>
+  </div>
+</section>
+
+<section class="cta" id="join">
+  <div class="wrap">
+    <h2>Come as a Friend. Leave as a Sistah.</h2>
+    <p>Your next adventure—and your next great friendship—are waiting.</p>
+    <a class="btn btn-light" href="mailto:optimaxproai@gmail.com?subject=Sistah-Friends%20Interest">Join the Sisterhood Today →</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footer">
+    <div class="brand">
+      <div class="logo-heart"><svg viewBox="0 0 100 100"><path d="M50 88C26 72 13 58 13 38C13 24 23 15 36 15C45 15 50 21 50 21C50 21 55 15 64 15C77 15 87 24 87 38C87 58 74 72 50 88Z" fill="none" stroke="#e2137b" stroke-width="6"/></svg></div>
+      <div class="logo-text"><div class="name">Sistah-Friends</div><div class="tag">Friendship • Fun • Purpose • Together</div></div>
+    </div>
+    <div class="footer-links"><a href="#about">About</a><a href="#past-events">Past Events</a><a href="#future-events">Future Ideas</a><a href="#circles">Circles</a><a href="#impact">Impact</a><a href="#suggest">Suggest</a></div>
+    <div class="footer-host">A program hosted by<br><b>Designer Destinations & Events</b></div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
