@@ -237,7 +237,8 @@ footer{background:var(--deep);color:#d9c9e1;padding:38px 0}
       <a href="#circles">Circles</a>
       <a href="#impact">Impact</a>
       <a href="#join-community">Join</a>
-      <a href="#suggest">Suggest</a>
+      <a href="#suggest">Suggest</a><a href="#shop">T-Shirts</a>
+      <a href="#shop">Shop</a>
       <a class="btn btn-primary" href="#rsvp">RSVP</a>
     </nav>
   </div>
@@ -392,6 +393,7 @@ footer{background:var(--deep);color:#d9c9e1;padding:38px 0}
         <h3>Join Sistah-Friends</h3>
         <p>Tell us a little about yourself and what you would enjoy doing with the community.</p>
         <form class="form" action="https://formsubmit.co/designerdestinationsandevents@gmail.com" method="POST">
+<input type="hidden" name="_next" value="" data-thankyou-redirect>
           <input type="hidden" name="_subject" value="New Sistah-Friends Join Request">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
@@ -424,6 +426,7 @@ footer{background:var(--deep);color:#d9c9e1;padding:38px 0}
         <h3>Refer a Friend</h3>
         <p>Know a woman who would enjoy Sistah-Friends? Introduce her to the community.</p>
         <form class="form" action="https://formsubmit.co/designerdestinationsandevents@gmail.com" method="POST">
+<input type="hidden" name="_next" value="" data-thankyou-redirect>
           <input type="hidden" name="_subject" value="New Sistah-Friends Friend Referral">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
@@ -502,6 +505,7 @@ footer{background:var(--deep);color:#d9c9e1;padding:38px 0}
 
     <div class="form-card">
       <form class="form" action="https://formsubmit.co/designerdestinationsandevents@gmail.com" method="POST" id="rsvpForm">
+<input type="hidden" name="_next" value="" data-thankyou-redirect>
         <input type="hidden" name="_subject" value="Sistah-Friends RSVP — August 29 Restart">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
@@ -549,6 +553,7 @@ footer{background:var(--deep);color:#d9c9e1;padding:38px 0}
     </div>
     <div class="form-card">
       <form class="form" action="https://formsubmit.co/designerdestinationsandevents@gmail.com" method="POST">
+<input type="hidden" name="_next" value="" data-thankyou-redirect>
         <input type="hidden" name="_subject" value="New Sistah-Friends Suggestion">
         <input type="hidden" name="_captcha" value="false">
         <div class="two-col">
@@ -575,6 +580,16 @@ footer{background:var(--deep);color:#d9c9e1;padding:38px 0}
     </div>
   </div>
 </section>
+
+<section class="section alt" id="shop">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow">Sistah-Friends Shop</div>
+    <h2>Wear the Sisterhood</h2>
+    <p class="lead" style="margin-left:auto;margin-right:auto">Official Sistah-Friends T-shirts are coming soon. Check back for the opportunity to order yours and represent the sisterhood wherever you go.</p>
+    <span class="btn btn-secondary" aria-disabled="true">T-Shirts — Coming Soon</span>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -617,5 +632,17 @@ function downloadICS(which){
   if(which==='both') makeICS([aug,sep],'Sistah-Friends-Events.ics');
 }
 </script>
+
+<script>
+(function () {
+  var clean = window.location.href.split('#')[0].split('?')[0];
+  var folder = clean.substring(0, clean.lastIndexOf('/') + 1);
+  var thankYouUrl = folder + 'thank-you.html';
+  document.querySelectorAll('[data-thankyou-redirect]').forEach(function(input){
+    input.value = thankYouUrl;
+  });
+})();
+</script>
+
 </body>
 </html>
