@@ -24,6 +24,20 @@ h1{font-family:"Playfair Display",serif;color:var(--purple);font-size:clamp(2.7r
 .soon{display:inline-flex;background:#f6eaf5;color:var(--purple);padding:6px 10px;border-radius:999px;font-size:.7rem;font-weight:900;letter-spacing:.08em}
 footer{background:var(--deep);color:#d9c9e1;text-align:center;padding:24px;font-size:.8rem}
 @media(max-width:700px){.extras{grid-template-columns:1fr}.opti{grid-template-columns:90px 1fr}.opti img{width:90px}.card{padding:32px 20px}}
+
+/* SISTAH-FRIENDS SPONSORS */
+.sf-sponsors{padding:52px 0;background:linear-gradient(135deg,#fff8f5,#fbf3ff)}
+.sf-sponsors-inner{width:min(1040px,92%);margin:auto;text-align:center}
+.sf-sponsors-kicker{font-size:.72rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#e31379}
+.sf-sponsors h2{margin:.35rem 0 .5rem}
+.sf-sponsors-intro{max-width:650px;margin:0 auto 22px;color:#6e6072}
+.sf-sponsor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sf-sponsor-card{display:flex;flex-direction:column;padding:20px;border:1px solid #eadfe9;border-radius:20px;background:#fff;text-align:left;box-shadow:0 8px 24px rgba(45,0,59,.06)}
+.sf-sponsor-card strong{color:#44006f;font-size:1.05rem}
+.sf-sponsor-card p{color:#6e6072;font-size:.84rem;flex:1}
+.sf-sponsor-link{align-self:flex-start;display:inline-flex;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,#e31379,#ff7a3d,#ffc83d);color:#fff!important;font-size:.76rem;font-weight:800;text-decoration:none}
+@media(max-width:760px){.sf-sponsor-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -59,7 +73,33 @@ footer{background:var(--deep);color:#d9c9e1;text-align:center;padding:24px;font-
         <a class="btn secondary" href="Sistah-Friends.html#shop">T-Shirts — Coming Soon</a>
       </div>
     </section>
-  </main>
+  
+<section class="sf-sponsors" id="sponsors">
+  <div class="sf-sponsors-inner">
+    <div class="sf-sponsors-kicker">Sponsors & Community Partners</div>
+    <h2>Explore Our Community</h2>
+    <p class="sf-sponsors-intro">Sistah-Friends is supported by businesses and digital tools that help make connection, experiences and everyday life a little easier.</p>
+    <div class="sf-sponsor-grid">
+      <article class="sf-sponsor-card">
+      <strong>OptiMaxProAI</strong>
+      <p>AI-powered ideas, digital solutions and tools designed to help people and businesses work smarter.</p>
+      <a class="sf-sponsor-link" href="https://www.optimaxproai.com" target="_blank" rel="noopener noreferrer">Visit OptiMaxProAI →</a>
+    </article>
+<article class="sf-sponsor-card">
+      <strong>OptiEatsAI</strong>
+      <p>A dining concierge that helps you decide where to eat and remember the restaurants and dining experiences you love.</p>
+      <a class="sf-sponsor-link" href="https://optieatsai.optimaxproai.com" target="_blank" rel="noopener noreferrer">Visit OptiEatsAI →</a>
+    </article>
+<article class="sf-sponsor-card">
+      <strong>Designer Destinations & Events</strong>
+      <p>Group travel, events and memorable experiences — and the host behind Sistah-Friends.</p>
+      <a class="sf-sponsor-link" href="https://www.designerdestinationsandevents.com" target="_blank" rel="noopener noreferrer">Visit Designer Destinations & Events →</a>
+    </article>
+    </div>
+  </div>
+</section>
+
+</main>
 </div>
 <footer>Sistah-Friends • Hosted by Designer Destinations & Events<br>designerdestinationsandevents@gmail.com</footer>
 </body>
