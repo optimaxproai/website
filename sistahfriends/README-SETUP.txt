@@ -34,3 +34,7 @@ WEBSITE
 Upload sistahfriends.html, thank-you.html, and the assets folder together.
 Keep the assets folder beside the HTML files so the hero image path remains:
 assets/sistahfriends-hero.png
+
+LAYOUT UPDATE
+-------------
+The Hosted By section now appears directly above the footer with an upgraded CTA.
